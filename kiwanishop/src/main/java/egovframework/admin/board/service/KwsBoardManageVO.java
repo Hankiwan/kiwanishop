@@ -15,7 +15,7 @@ import egovframework.admin.common.KwsPageVO;
  * @since 2014. 06.17
  * @version 1.0
  * @see
- * test
+ * 
  *  Copyright (C) by MOPAS All right reserved.
  */
 
