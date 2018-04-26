@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN"
+    "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+	<sqlMap resource="egovframework/sqlmap/admin/login/KwsLoginManage_SQL_mysql.xml"/>
+	<sqlMap resource="egovframework/sqlmap/admin/result/KwsResultManage_SQL_mysql.xml"/>
+	<sqlMap resource="egovframework/sqlmap/admin/member/KwsMemberManage_SQL_mysql.xml"/>
+	<sqlMap resource="egovframework/sqlmap/admin/code/KwsCodeManage_SQL_mysql.xml"/>
+	<sqlMap resource="egovframework/sqlmap/admin/menu/KwsMenuManage_SQL_mysql.xml"/>
+	<sqlMap resource="egovframework/sqlmap/admin/include/KwsIncludeManage_SQL_mysql.xml"/>
+	<sqlMap resource="egovframework/sqlmap/admin/board/KwsBoardManage_SQL_mysql.xml"/>
+	<sqlMap resource="egovframework/sqlmap/admin/commonBoard/KwsCommonBoardManage_SQL_mysql.xml"/>
+</sqlMapConfig>

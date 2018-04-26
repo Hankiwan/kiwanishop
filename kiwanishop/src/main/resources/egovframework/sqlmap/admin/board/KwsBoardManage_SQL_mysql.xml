@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Board">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="kwsBoardManageVO" type="egovframework.admin.board.service.KwsBoardManageVO"/>
+
+	<select id="boardManageDAO.selectBoardManageList" parameterClass="kwsBoardManageVO" resultClass="egovMap">
+		<![CDATA[
+			SELECT
+				MASTER_SN, 
+				MASTER_NM, 
+				MASTER_CN, 
+				SECRET_YN, 
+				EDITOR_YN, 
+				COMMENT_YN, 
+				REPLY_YN, 
+				FILE_YN, 
+				DATE_FORMAT(FRST_REGIST_DT, '%Y-%m-%d') FRST_REGIST_DT, 
+				FRST_REGIST_ID, 
+				FRST_REGIST_IP, 
+				LAST_UPDT_DT, 
+				LAST_UPDT_ID, 
+				LAST_UPDT_IP, 
+				KEYWORD_YN, 
+				DELETE_YN
+			FROM BOARD_MASTER 
+			WHERE 1=1
+		]]>
+		<isNotEmpty prepend="AND" property="searchValue">
+			<isEqual property="searchType" compareValue="masterNm">
+				<![CDATA[ MASTER_NM = #searchValue# ]]>
+			</isEqual>
+			<isEqual property="searchType" compareValue="masterCn">
+				<![CDATA[ MASTER_CN like CONCAT('%', #searchValue#, '%') ]]>
+			</isEqual>
+		</isNotEmpty>
+		<![CDATA[
+			ORDER BY FRST_REGIST_DT DESC
+			LIMIT #firstIndex#, #recordCountPerPage#
+		]]>
+	</select>
+	
+	<select id="boardManageDAO.selectBoardManageCnt" parameterClass="kwsBoardManageVO" resultClass="java.lang.Integer">
+		<![CDATA[
+			SELECT
+				COUNT(MASTER_SN)
+			FROM BOARD_MASTER 
+			WHERE 1=1
+		]]>
+		<isNotEmpty prepend="AND" property="searchValue">
+			<isEqual property="searchType" compareValue="masterNm">
+				<![CDATA[ MASTER_NM = #searchValue# ]]>
+			</isEqual>
+			<isEqual property="searchType" compareValue="masterCn">
+				<![CDATA[ MASTER_CN like CONCAT('%', #searchValue#, '%') ]]>
+			</isEqual>
+		</isNotEmpty>
+	</select>
+	
+	<select id="boardManageDAO.selectBoardManageView" parameterClass="kwsBoardManageVO" resultClass="egovMap">
+		<![CDATA[
+			SELECT
+				MASTER_SN, 
+				MASTER_NM, 
+				MASTER_CN, 
+				SECRET_YN, 
+				EDITOR_YN, 
+				COMMENT_YN, 
+				REPLY_YN, 
+				FILE_YN, 
+				FRST_REGIST_DT, 
+				FRST_REGIST_ID, 
+				FRST_REGIST_IP, 
+				LAST_UPDT_DT, 
+				LAST_UPDT_ID, 
+				LAST_UPDT_IP, 
+				KEYWORD_YN, 
+				DELETE_YN
+			FROM BOARD_MASTER 
+			WHERE MASTER_SN = #masterSn#;
+		]]>
+	</select>
+	
+	<insert id="boardManageDAO.insertBoardManage" parameterClass="kwsBoardManageVO">
+		<selectKey resultClass="java.lang.String" keyProperty="masterSn">
+			SELECT IFNULL(MAX(CAST(MASTER_SN AS SIGNED)), 0) + 1 AS MASTER_SN FROM BOARD_MASTER
+		</selectKey>
+		INSERT INTO BOARD_MASTER 
+		(
+			MASTER_SN, 
+			MASTER_NM, 
+			MASTER_CN, 
+			SECRET_YN, 
+			EDITOR_YN, 
+			COMMENT_YN, 
+			REPLY_YN, 
+			FILE_YN, 
+			FRST_REGIST_DT, 
+			FRST_REGIST_ID, 
+			FRST_REGIST_IP, 
+			LAST_UPDT_DT, 
+			LAST_UPDT_ID, 
+			LAST_UPDT_IP, 
+			KEYWORD_YN, 
+			DELETE_YN
+		)
+		VALUES
+		(
+			#masterSn#, 
+			#masterNm#, 
+			#masterCn#, 
+			#secretYn#, 
+			#editorYn#, 
+			#commentYn#, 
+			#replyYn#, 
+			#fileYn#, 
+			now(), 
+			#frstRegistId#, 
+			#frstRegistIp#, 
+			now(), 
+			#lastUpdtId#, 
+			#lastUpdtIp#, 
+			#keywordYn#, 
+			#deleteYn#
+		);
+	</insert>
+	
+	<update id="boardManageDAO.updateBoardManage" parameterClass="kwsBoardManageVO">
+		UPDATE BOARD_MASTER 
+		SET
+			MASTER_NM = #masterNm# , 
+			MASTER_CN = #masterCn# , 
+			SECRET_YN = #secretYn# , 
+			EDITOR_YN = #editorYn# , 
+			COMMENT_YN = #commentYn# , 
+			REPLY_YN = #replyYn# , 
+			FILE_YN = #fileYn# , 
+			LAST_UPDT_DT = now() , 
+			LAST_UPDT_ID = #lastUpdtId# , 
+			LAST_UPDT_IP = #lastUpdtIp# , 
+			KEYWORD_YN = #keywordYn# , 
+			DELETE_YN = #deleteYn#
+		WHERE
+			MASTER_SN = #masterSn#; 
+	</update>
+	
+	<delete id="boardManageDAO.deleteBoardManage" parameterClass="kwsBoardManageVO">
+		DELETE FROM BOARD_MASTER 
+		WHERE
+		MASTER_SN = #masterSn# 
+	</delete>
+	
+</sqlMap>

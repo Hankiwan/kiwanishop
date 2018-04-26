@@ -1,0 +1,12 @@
+/***********
+Author : 김광성
+Version : 1.0
+************/
+
+@import url('main.css'); /* 메인 정의 */
+@import url('base.css'); /* 공통적용 부분 정의 */
+@import url('layout.css'); /* 레이아웃 정의 */
+@import url('fontspace.css'); /* 폰트 및 패팅 마진 속성 정의 */
+@import url('board.css'); /* 게시판 속성 정의 */
+@import url('content.css'); /* 컨텐츠 영역 정의 */
+@import url('popup.css'); /* 팝업 정의 */

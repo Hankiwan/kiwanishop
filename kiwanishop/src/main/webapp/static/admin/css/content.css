@@ -1,0 +1,144 @@
+/***********
+Author : 김광성
+Version : 1.0
+************/
+
+
+/*****  공통 타이틀 *****/
+.tit_h2 {background:url('../images/common/blt/h2_blt.gif') no-repeat 0 50%; font-size:1.3em; color:#555555; font-weight:bold; line-height:1.0em; padding:0 0 0 20px; margin:0 0 40px 0; float:left; width:310px; line-height:1.1em;}
+.front_tit_h2 {background:url('../images/common/blt/h2_blt.gif') no-repeat 0 0; font-size:1.3em; color:#555555; font-weight:bold; padding:0 0 0 20px; margin:0 0 10px 0; width:100%; line-height:1.1em;}
+.h2_subcopy {width:100%;}
+.h2_subcopy li {background:url('../images/common/blt/blt_greydot.gif') no-repeat 12px 6px; padding:0 0 0 20px;}
+.tit_h3 {background:url('../images/common/blt/blt_h3.gif') no-repeat 6px 5px; font-size:1em; color:#666666; font-weight:bold; padding:0 0 0 20px; margin:0 0 5px 0; width:100%; line-height:1.5em;}
+.noBlt_tit {color:#000000; font-size:1.2em; font-weight:bold; line-height:1.5em; margin:0 0 8px 0;}
+.point_blueTxt {color:#4E91BB; padding:0 0 0 12px; line-height:1.5em;}
+.point_blueTxt02 {color:#4E91BB; padding:0 0 0 20px; line-height:1.5em;}
+
+
+/*****  다이어그램 *****/
+.diagramLay01 {width:100%; position:relative; overflow:hidden;}
+.diagramLay02 {width:142px; position:relative; margin:0 0 0 107px; float:left; overflow:hidden; display:inline;}
+.diagramLay03 {width:142px; position:relative; margin:0 0 0 31px; float:left; overflow:hidden;}
+.diagramLay04 {width:445px; height:118px; margin:0 0 27px 115px; position:relative; overflow:hidden;}
+.diagramLay05 {width:422px; height:118px; margin:0 0 27px 138px; position:relative;}
+.diagramBg01 {width:142px; height:53px; text-align:center; background:url('../images/common/diagram_bgbox.gif') no-repeat 0 0; margin:0 0 0 193px; float:left; display:inline;}
+.diagramBg02 {width:142px; height:53px; text-align:center; background:url('../images/common/diagram_bgbox.gif') no-repeat 0 0; margin:0 0 0 108px; float:left; display:inline;}
+.diagramBg03 {width:142px; height:53px; text-align:center; background:url('../images/common/diagram_bgbox.gif') no-repeat 0 0; margin:0 0 0 31px; float:left; display:inline;}
+.diagramBg04 {width:142px; height:53px; text-align:center; background:url('../images/common/diagram_bgbox.gif') no-repeat 0 0;}
+.diagramBg05 {width:192px; height:63px; text-align:center; background:url('../images/common/diagram_bgbox02.gif') no-repeat 0 0; margin:0 0 0 135px; float:left; display:inline;}
+.diagramBg06 {width:252px; height:64px; text-align:center; background:url('../images/common/diagram_bgbox03.gif') no-repeat 0 0; margin:0 0 0 129px; float:left; display:inline;}
+.diagramBg07 {width:252px; height:64px; text-align:center; background:url('../images/common/diagram_bgbox03.gif') no-repeat 0 0; float:left; display:inline;}
+.diagramBg08 {width:222px; text-align:center; margin:0 0 0 18px; float:left; display:inline; font-size:1em;}
+.diagramBg09 {width:256px; text-align:center; margin:0 0 0 30px; float:left; display:inline; font-size:1em;}
+.diagramBg10 {width:154px; height:235px; text-align:center; float:left; display:inline; background:url('../images/common/diagram_bgbox06.gif') no-repeat 0 0; margin:145px 0 0 0;}
+.diagramBg11 {width:222px; height:74px; text-align:center; background:url('../images/common/diagram_bgbox04.gif') no-repeat 0 0; float:left; display:inline;}
+.diagramBg12 {width:252px; height:104px; text-align:center; background:url('../images/common/diagram_bgbox05.gif') no-repeat 0 0; float:left; display:inline;}
+.diagramBg13 {width:131px; height:52px; text-align:center; background:url('../images/common/diagram_bgbox07.gif') no-repeat 0 0; float:left; display:inline;}
+
+
+.diagram_dotarrow {width:39px; height:9px; margin:22px 0 0 4px; float:left; display:inline;}
+.diagram_dotarrow02 {width:39px; height:9px; margin:62px 0 0 4px; float:left; display:inline;}
+.diagram_dotarrow03 {width:39px; margin:15px 0 0 4px; float:left; display:inline;}
+.diagram_dotarrow04 {width:39px; margin:37px 0 0 4px; float:left; display:inline;}
+.diagram_btn01 {width:78px; float:left; margin:17px 0 0 0;}
+.diagram_btn02 {width:88px; float:left; margin:10px 0 0 0;}
+.diagram_btn03 {width:88px; float:left; margin:33px 0 0 0;}
+.diagram_btn04 {width:200px; float:left; margin:10px 0 0 0;}
+.diagramMove {padding:7px 0 9px 253px;}
+.diagramMove02 {padding:7px 0 9px 0; text-align:center; font-size:0.9em;}
+.diagramMove03 {padding:7px 0 9px 220px;}
+.diagramMove04 {padding:7px 0 9px 246px;}
+.diagramMove05 {padding:7px 0 9px 117px; font-size:0.9em;}
+.diagram_comment {width:215px; padding:59px 0 0 0; float:left; letter-spacing:-1px;}
+.diagram_bg {width:118px; height:118px; background:url('../images/common/diagram_bgcircle.gif') no-repeat 0 0; text-align:center; float:left;}
+.diagram_arrow {width:13px; padding:48px 9px 0 7px; float:left;}
+.diagram_arrow02 {width:13px; padding:15px 10px 0 9px; float:left;}
+.diagram_leftmove {width:59px; height:62px; margin:30px 0 0 70px; float:left; display:inline;}
+.diagram_rightmove {width:58px; height:62px; margin:30px 0 0 0; float:left;}
+
+
+
+/*****  공통블릿 *****/
+.bltList01 {width:100%;}
+.bltList01 li {background:url('../images/common/blt/blt_greydot.gif') no-repeat 0 7px; padding:0 0 0 7px; line-height:1.5em;}
+
+
+/***** 상단타이틀 *****/
+.location {width:756px; padding:0 0 40px 0;}
+.titArea {width:756px; height:20px; position:relative;}
+.titCopy {width:330px; float:left; margin:7px 0 0 0; height:13px;}
+.history {width:350px; float:left; margin:7px 0 0 0; font-size:0.9em; text-align:right; height:13px;}
+
+
+/***** 공통 Tab *****/
+.tab {width:100%; height:32px; background:url('../images/common/tab_bg_line.gif') repeat-x 0 0; float:left; margin:0 0 30px 0;}
+.tab li {float:left;}
+
+
+/***** 공통 라운드박스 *****/
+.boxCont {width:100%; background:url('../images/common/box_center.gif') repeat-y 0 0; float:left;}
+
+
+
+
+/***** info(정보마당) *****/
+.consign_explan {width:600px; height:118px; background:url('../images/info/consign_puzzle.gif') no-repeat right 0; margin:0 80px 40px 0; clear:both;}
+.consign_explan h2 {padding:20px 0 17px 16px;}
+.strategy_info {width:635px; height:118px; background:url('../images/info/strategy_bg.gif') no-repeat right 0; margin:0 45px 40px 0; clear:both;}
+.strategy_info h2 {padding:16px 0 17px 20px;}
+.info_sumtotal {width:655px; height:155px; background:url('../images/info/sub_sumtotal.gif') no-repeat right 0; margin:0 25px 40px 0; clear:both;}
+.info_sumtotal h2 {padding:50px 0 0 50px;}
+.sumtotal_one {width:542px; height:35px; margin:0 0 35px 70px; background:url('../images/info/h3_one_01.gif') no-repeat 0 0; float:left; overflow:hidden;}
+.sumtotal_two {width:542px; height:35px; margin:0 0 35px 70px; background:url('../images/info/h3_two_01.gif') no-repeat 0 0; float:left; overflow:hidden;}
+.sumtotal_three {width:542px; height:35px; margin:0 0 35px 70px; background:url('../images/info/h3_three_01.gif') no-repeat 0 0; float:left; overflow:hidden;}
+.sumtotal_four {width:542px; height:35px; margin:0 0 35px 70px; background:url('../images/info/h3_four_01.gif') no-repeat 0 0; float:left; overflow:hidden;}
+.sumtotal_five {width:542px; height:35px; margin:0 0 35px 70px; background:url('../images/info/h3_five_01.gif') no-repeat 0 0; float:left; overflow:hidden;}
+.sumtotal_tit {width:105px; margin:0 0 0 42px; float:left;}
+.sumtotal_txt {width:338px; float:left;}
+.sumtotal_btn {width:57px; float:left;}
+
+
+/***** join(참여마당) *****/
+.consultSub {width:100%; background:url('../images/join/trade_bg_img01.gif') no-repeat 0 0; margin:0 0 20px 0;}
+.consultSub ul {padding:13px 0 0 205px; line-height:1.5em;}
+.consultSub ul li{background:url('../images/common/blt/blt_greydot.gif') no-repeat 0 7px; padding:0 0 13px 8px;}
+.help {width:100%; height:70px; background:url('../images/join/trade_bg_help.gif') no-repeat 0 0; font-size:0.9em;}
+.helpList {padding:13px 0 0 55px;}
+.helpList li {background:url('../images/common/blt/blt_dot.gif') no-repeat 0 9px; padding:0 0 0 9px; line-height:2.1em;}
+.helpList02 {padding:26px 0 0 55px;}
+.helpList02 li {background:url('../images/common/blt/blt_dot.gif') no-repeat 0 9px; padding:0 0 0 9px; line-height:2.1em;}
+.submitImg {width:206px; height:114px; margin:12px 0 0 15px; background:url('../images/join/common_namecheck.gif') no-repeat 0 0; float:left; display:inline;}
+.submiyInput {width:459px; height:114px; margin:12px 0 0 0; float:left;}
+.loginBlt {background:url('../images/common/blt/blt_blackdot.gif') no-repeat 0 8px; padding:0 0 0 8px;}
+.hsSearch {width:180px; height:580px; background-color:#F0F0EB; float:left; margin:0 10px 0 0;}
+.hsSearch h2 {color:#666666; font-weight:bold; text-align:center; line-height:1.2em; padding:7px 0 5px 0;}
+.searchTable {width:153px; height:532px; margin:0 0 0 5px; padding:10px 5px 5px 10px; border:1px solid #CCCCCC; background-color:#FFFFFF; overflow:auto;}
+.searchTable li {line-height:1.5em;}
+.dividList {width:490px; float:left;}
+.consultIntro {width:665px; height:105px; margin:17px 0 17px 15px; background:url('../images/join/bg_book.gif') no-repeat 0 0;}
+.consultIntro ul {padding:17px 0 0 125px; line-height:1.5em;}
+.consultIntro ul li{background:url('../images/common/blt/blt_greydot.gif') no-repeat 0 7px; padding:0 0 13px 8px;}
+
+
+/***** data(자료마당) *****/
+.loanSystem_bg {width:640px; height:118px; background:url('../images/data/bg_pig.gif') no-repeat right 0; margin:0 40px 40px 0; clear:both;}
+.loanSystem_bg h2 {padding:16px 0 17px 20px;}
+.insurance_bg {width:640px; height:118px; background:url('../images/data/bg_human.gif') no-repeat right 0; margin:0 40px 40px 0; clear:both;}
+.insurance_bg h2 {padding:16px 0 17px 20px;}
+
+
+/***** utility *****/
+.colorBox_grey {width:678px; background-color:#FAFAFA; border:1px solid #E2E2E2; color:#777777; margin:0 0 40px 0;}
+.law_txt {padding:15px 14px;}
+.protect_txt {padding:0 0 20px 20px;}
+.protect_list {background:url('../images/common/blt/blt_greydot.gif') no-repeat 12px 7px; padding:0 0 0 20px;}
+.sitemap_level01 {width:100%; overflow:hidden;}
+.mapLayout01 {width:225px; position:relative; background:url('../images/utility/bg_one.gif') no-repeat 0 0; float:left;}
+.mapLayout02 {width:225px; position:relative; background:url('../images/utility/bg_two.gif') no-repeat 0 0; float:left;}
+.mapLayout03 {width:225px; position:relative; background:url('../images/utility/bg_three.gif') no-repeat 0 0; float:left;}
+.mapLayout04 {width:225px; position:relative; background:url('../images/utility/bg_four.gif') no-repeat 0 0; float:left;}
+.mapLayout05 {width:225px; position:relative; background:url('../images/utility/bg_five.gif') no-repeat 0 0; float:left;}
+.list_layout {width:150px; margin:12px 0 0 65px;}
+.sitemap_list {background:url('../images/common/blt/blt_greydot.gif') no-repeat 2px 12px; border-bottom:1px solid #EDEDED; padding:5px 0 4px 11px;}
+.list_depth2 {width:150px; font-size:0.9em; padding:4px 0 0 0;}
+

@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Board">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="kwsCommonBoardManageVO" type="egovframework.admin.commonBoard.service.KwsCommonBoardManageVO"/>
+	<typeAlias  alias="fileVO" type="egovframework.com.cmm.service.FileVO"/>
+
+	<select id="commonBoardManageDAO.selectMasterBoardManageList" parameterClass="kwsCommonBoardManageVO" resultClass="egovMap">
+		<![CDATA[
+			SELECT
+				MASTER_SN, 
+				MASTER_NM, 
+				MASTER_CN, 
+				SECRET_YN, 
+				EDITOR_YN, 
+				COMMENT_YN, 
+				REPLY_YN, 
+				FILE_YN, 
+				DATE_FORMAT(FRST_REGIST_DT, '%Y-%m-%d') FRST_REGIST_DT, 
+				FRST_REGIST_ID, 
+				FRST_REGIST_IP, 
+				LAST_UPDT_DT, 
+				LAST_UPDT_ID, 
+				LAST_UPDT_IP, 
+				KEYWORD_YN, 
+				DELETE_YN
+			FROM BOARD_MASTER 
+			ORDER BY FRST_REGIST_DT DESC
+		]]>
+	</select>
+	
+	<select id="commonBoardManageDAO.selectMasterBoardManageView" parameterClass="kwsCommonBoardManageVO" resultClass="egovMap">
+		<![CDATA[
+			SELECT
+				MASTER_SN, 
+				MASTER_NM, 
+				MASTER_CN, 
+				SECRET_YN, 
+				EDITOR_YN, 
+				COMMENT_YN, 
+				REPLY_YN, 
+				FILE_YN, 
+				DATE_FORMAT(FRST_REGIST_DT, '%Y-%m-%d') FRST_REGIST_DT, 
+				FRST_REGIST_ID, 
+				FRST_REGIST_IP, 
+				LAST_UPDT_DT, 
+				LAST_UPDT_ID, 
+				LAST_UPDT_IP, 
+				KEYWORD_YN, 
+				DELETE_YN
+			FROM BOARD_MASTER 
+			WHERE MASTER_SN = #masterSn#
+		]]>
+	</select>
+	
+	<select id="commonBoardManageDAO.selectCommonBoardManageList" parameterClass="kwsCommonBoardManageVO" resultClass="egovMap">
+		<![CDATA[
+			SELECT
+				BOARD_SN, 
+				MASTER_SN, 
+				TITLE, 
+				BOARD_CN, 
+				SECRET_USE_YN, 
+				FILE_ID, 
+				DATE_FORMAT(FRST_REGIST_DT, '%Y-%m-%d') FRST_REGIST_DT, 
+				FRST_REGIST_ID, 
+				FRST_REGIST_IP, 
+				LAST_UPDT_DT, 
+				LAST_UPDT_ID, 
+				LAST_UPDT_IP, 
+				KEYWORD, 
+				CNT, 
+				REPLY_FLAG, 
+				PARENT_NUM, 
+				REPLY_LC, 
+				WELL_ORDER, 
+				DELETE_YN, 
+				BOARD_NO
+			FROM BOARD
+			WHERE MASTER_SN = #masterSn#
+			ORDER BY FRST_REGIST_DT DESC
+		]]>
+	</select>
+	
+	<select id="commonBoardManageDAO.selectCommonBoardManageCnt" parameterClass="kwsCommonBoardManageVO" resultClass="java.lang.Integer">
+		<![CDATA[
+			SELECT
+				COUNT(BOARD_SN)
+			FROM BOARD
+			WHERE MASTER_SN = #masterSn#
+		]]>
+	</select>
+	
+	<select id="commonBoardManageDAO.selectCommonBoardManageView" parameterClass="kwsCommonBoardManageVO" resultClass="egovMap">
+		<![CDATA[
+			SELECT
+				BOARD_SN, 
+				MASTER_SN, 
+				TITLE, 
+				BOARD_CN, 
+				SECRET_USE_YN, 
+				FILE_ID, 
+				DATE_FORMAT(FRST_REGIST_DT, '%Y-%m-%d') FRST_REGIST_DT, 
+				FRST_REGIST_ID, 
+				FRST_REGIST_IP, 
+				LAST_UPDT_DT, 
+				LAST_UPDT_ID, 
+				LAST_UPDT_IP, 
+				KEYWORD, 
+				CNT, 
+				REPLY_FLAG, 
+				PARENT_NUM, 
+				REPLY_LC, 
+				WELL_ORDER, 
+				DELETE_YN, 
+				BOARD_NO
+			FROM BOARD
+			WHERE BOARD_SN = #boardSn#
+		]]>
+	</select>
+	
+	<insert id="commonBoardManageDAO.insertCommonBoardManage" parameterClass="kwsCommonBoardManageVO">
+		<selectKey resultClass="java.lang.String" keyProperty="boardSn">
+			SELECT IFNULL(MAX(CAST(BOARD_SN AS SIGNED)), 0) + 1 AS BOARD_SN FROM BOARD
+		</selectKey>
+		INSERT INTO BOARD
+		(
+			BOARD_SN, 
+			MASTER_SN, 
+			TITLE, 
+			BOARD_CN, 
+			SECRET_USE_YN, 
+			FILE_ID, 
+			FRST_REGIST_DT, 
+			FRST_REGIST_ID, 
+			FRST_REGIST_IP, 
+			LAST_UPDT_DT, 
+			LAST_UPDT_ID, 
+			LAST_UPDT_IP, 
+			KEYWORD, 
+			CNT, 
+			REPLY_FLAG, 
+			PARENT_NUM, 
+			REPLY_LC, 
+			WELL_ORDER, 
+			DELETE_YN, 
+			BOARD_NO,
+			SECRET_NUM
+		)
+		VALUES
+		(
+			#boardSn#, 
+			#masterSn#, 
+			#title#, 
+			#boardCn#, 
+			#secretUseYn#, 
+			#fileId#, 
+			now(), 
+			#frstRegistId#, 
+			#frstRegistIp#, 
+			now(), 
+			#lastUpdtId#, 
+			#lastUpdtIp#, 
+			#keyword#, 
+			'0',
+			'N',
+			'0',
+			'0',
+			#boardSn#,
+			'N',
+			'1',
+			#secretNum#
+		);
+	</insert>
+	
+	<update id="commonBoardManageDAO.updateCommonBoardManage" parameterClass="kwsCommonBoardManageVO">
+		UPDATE BOARD
+		SET
+			TITLE = #title# , 
+			BOARD_CN = #boardCn# , 
+			SECRET_USE_YN = #secretUseYn# , 
+			FILE_ID = #fileId# , 
+			LAST_UPDT_DT = now() , 
+			LAST_UPDT_ID = #lastUpdtId# , 
+			LAST_UPDT_IP = #lastUpdtIp# , 
+			KEYWORD = #keyword# , 
+			CNT = #cnt# , 
+			REPLY_FLAG = #replyFlag# , 
+			PARENT_NUM = #parentNum# , 
+			REPLY_LC = #replyLc# , 
+			WELL_ORDER = #wellOrder# , 
+			DELETE_YN = #deleteYn# , 
+			BOARD_NO = #boardNo#
+		WHERE
+			BOARD_SN = #boardSn#; 
+	</update>
+	
+	<delete id="commonBoardManageDAO.deleteCommonBoardManage" parameterClass="kwsCommonBoardManageVO">
+		DELETE FROM BOARD 
+		WHERE
+		BOARD_SN = #boardSn# 
+	</delete>
+	
+	<insert id="commonBoardManageDAO.insertFile" parameterClass="fileVO">
+		INSERT INTO COM_FILE 
+		(
+			FILE_ID, 
+			FRST_REGIST_DT, 
+			FRST_REGIST_ID, 
+			FRST_REGIST_IP, 
+			LAST_UPDT_DT, 
+			LAST_UPDT_ID, 
+			LAST_UPDT_IP
+		)
+		VALUES
+		(
+			#atchFileId#, 
+			now(), 
+			#frstRegistId#, 
+			#frstRegistIp#, 
+			now(), 
+			#lastUpdtId#, 
+			#lastUpdtIp# 
+		)
+	</insert>
+	
+	<insert id="commonBoardManageDAO.insertFileDetail" parameterClass="fileVO">
+		INSERT INTO KIWANISHOP.COM_FILEDETAIL 
+		(
+			FILE_ID, 
+			FILE_NO, 
+			FILE_STRE_COURS, 
+			FILE_NM, 
+			ORIGNL_FILE_NM, 
+			FILE_EXTSN, 
+			FRST_REGIST_DT, 
+			FRST_REGIST_ID, 
+			FRST_REGIST_IP, 
+			LAST_UPDT_DT, 
+			LAST_UPDT_ID, 
+			LAST_UPDT_IP
+		)
+		VALUES
+		(
+			#atchFileId#, 
+			#fileSn#, 
+			#fileStreCours#, 
+			#streFileNm#, 
+			#orignlFileNm#, 
+			#fileExtsn#, 
+			now(), 
+			#frstRegistId#, 
+			#frstRegistIp#, 
+			now(), 
+			#lastUpdtId#, 
+			#lastUpdtIp#
+		)
+	</insert>
+	
+	<delete id="commonBoardManageDAO.deleteFile" parameterClass="fileVO">
+		DELETE FROM COM_FILE 
+		WHERE
+		FILE_ID = #atchFileId# 
+	</delete>
+	
+	<delete id="commonBoardManageDAO.deleteFileDetail" parameterClass="fileVO">
+		DELETE FROM COM_FILEDETAIL 
+		WHERE
+		FILE_ID = #atchFileId# AND FILE_NO = #fileSn#
+	</delete>
+	
+</sqlMap>

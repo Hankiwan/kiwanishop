@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Result">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="kwsResultManageVO" type="egovframework.admin.result.service.KwsResultManageVO"/>
+
+	<!-- 실적 조회 -->
+	<select id="kwsResultManageVO.resultMasterList" parameterClass="kwsResultManageVO" resultClass="egovMap">
+	<![CDATA[
+	 	SELECT 	
+	 		RESULT_MASTER_SN, 
+			REGIST_YEAR, 
+			REGIST_MONTH, 
+			DELETE_YN, 
+			DATE_FORMAT(FRST_REGIST_DT, '%Y-%m-%d') FRST_REGIST_DT, 
+			FRST_REGIST_ID, 
+			FRST_REGIST_IP, 
+			LAST_UPDT_DT, 
+			LAST_UPDT_ID, 
+			LAST_UPDT_IP
+		FROM RESULT_MASTER
+		WHERE DELETE_YN = 'N'
+	]]>
+	<isNotEmpty prepend="AND" property="searchValue">
+		<isEqual property="searchType" compareValue="searchYear">
+			<![CDATA[ REGIST_YEAR = #searchValue# ]]>
+		</isEqual>
+		<isEqual property="searchType" compareValue="searchMonth">
+			<![CDATA[ REGIST_MONTH = #searchValue# ]]>
+		</isEqual>
+		<isEqual property="searchType" compareValue="searchYM">
+			<![CDATA[ CONCAT(REGIST_YEAR, REGIST_MONTH) = #searchValue# ]]>
+		</isEqual>
+	</isNotEmpty>
+	<![CDATA[
+		LIMIT #firstIndex#, #recordCountPerPage#
+	]]>
+	</select>
+	
+	<!-- 실적 총갯수 -->
+	<select id="kwsResultManageVO.resultMasterListCnt" parameterClass="kwsResultManageVO" resultClass="java.lang.Integer">
+	<![CDATA[
+	 	SELECT 	
+			COUNT(RESULT_MASTER_SN)		 
+		FROM RESULT_MASTER
+		WHERE DELETE_YN = 'N'
+	]]>
+	<isNotEmpty prepend="AND" property="searchValue">
+		<isEqual property="searchType" compareValue="searchYear">
+			<![CDATA[ REGIST_YEAR = #searchValue# ]]>
+		</isEqual>
+		<isEqual property="searchType" compareValue="searchMonth">
+			<![CDATA[ REGIST_MONTH = #searchValue# ]]>
+		</isEqual>
+		<isEqual property="searchType" compareValue="searchYM">
+			<![CDATA[ CONCAT(REGIST_YEAR, REGIST_MONTH) = #searchValue# ]]>
+		</isEqual>
+	</isNotEmpty>
+	</select>
+
+	<!-- 실적 상세 정보 조회 -->
+	<select id="kwsResultManageVO.resultDetailView" parameterClass="kwsResultManageVO" resultClass="egovMap">
+	<![CDATA[
+	 	SELECT 	
+		  	RESULT_DETAIL_SN, 
+			RESULT_MASTER_SN, 
+			GUBUN_ONE, 
+			GUBUN_TWO, 
+			GUBUN_THREE, 
+			TRUNCATE(WEIGHT, 2) WEIGHT, 
+			TRUNCATE(SILWHAJU, 2) SILWHAJU, 
+			TRUNCATE(FWD, 2) FWD, 
+			TRUNCATE(VOLUME_TOTAL, 2) VOLUME, 
+			TRUNCATE(TEU, 2) TEU, 
+			TRUNCATE(COUNT, 2) COUNT, 
+			TRUNCATE(PROFIT_USD, 2) PROFIT_USD, 
+			TRUNCATE(TOTAL_ONE, 2) TOTAL_ONE, 
+			TRUNCATE(TOTAL_TWO, 2) TOTAL_TWO, 
+			TRUNCATE(TOTAL_THREE, 2) TOTAL_THREE, 
+			TRUNCATE(TOTAL_FOUR, 2) TOTAL_FOUR, 
+			TRUNCATE(TOTAL_FIVE, 2) TOTAL_FIVE, 
+			TRUNCATE(TOTAL_SIX, 2) TOTAL_SIX, 
+			TRUNCATE(TOTAL_SEVEN, 2) TOTAL_SEVEN, 
+			ALL_TOTAL, 
+			DELETE_YN, 
+			DATE_FORMAT(FRST_REGIST_DT, '%Y-%m-%d') FRST_REGIST_DT, 
+			FRST_REGIST_ID, 
+			FRST_REGIST_IP, 
+			LAST_UPDT_DT, 
+			LAST_UPDT_ID, 
+			LAST_UPDT_IP,
+			(SELECT REGIST_YEAR FROM RESULT_MASTER WHERE RESULT_MASTER_SN = #resultMasterSn#) REGIST_YEAR,
+			(SELECT REGIST_MONTH FROM RESULT_MASTER WHERE RESULT_MASTER_SN = #resultMasterSn#) REGIST_MONTH
+	 	FROM RESULT_DETAIL 
+		WHERE RESULT_MASTER_SN = #resultMasterSn#
+		AND DELETE_YN = 'N'
+		ORDER BY CONVERT(RESULT_DETAIL_SN, UNSIGNED) ASC;
+	]]>
+	</select>
+	
+	<!-- 실적 중복 등록 체크 -->
+	<select id="kwsResultManageVO.resultOverlapChk" parameterClass="kwsResultManageVO" resultClass="java.lang.Integer">
+	<![CDATA[
+	 	SELECT 	
+			COUNT(RESULT_MASTER_SN)		 
+		FROM RESULT_MASTER
+		WHERE REGIST_YEAR = #registYear#
+		AND REGIST_MONTH = #registMonth#
+		AND DELETE_YN = 'N';
+	]]>
+	</select>
+
+	<!-- 실적 마스터 등록 -->
+	<insert id="kwsResultManageVO.resultMasterInsert" parameterClass="kwsResultManageVO">
+		<selectKey resultClass="java.lang.String" keyProperty="resultMasterSn">
+			SELECT IFNULL(MAX(CAST(RESULT_MASTER_SN AS SIGNED)), 0) + 1 AS RESULT_MASTER_SN FROM RESULT_MASTER
+		</selectKey>
+		INSERT INTO RESULT_MASTER 
+		(
+			RESULT_MASTER_SN, 
+			REGIST_YEAR, 
+			REGIST_MONTH, 
+			DELETE_YN, 
+			FRST_REGIST_DT, 
+			FRST_REGIST_ID, 
+			FRST_REGIST_IP, 
+			LAST_UPDT_DT, 
+			LAST_UPDT_ID, 
+			LAST_UPDT_IP
+		)
+		VALUES
+		(
+			#resultMasterSn#, 
+			#registYear#, 
+			#registMonth#, 
+			'N', 
+			now(), 
+			#frstRegistId#, 
+			#frstRegistIp#, 
+			now(), 
+			#lastUpdtId#, 
+			#lastUpdtIp#
+		)
+	</insert>
+	
+	<!-- 실적 상세 등록 -->
+	<insert id="kwsResultManageVO.resultDetailInsert" parameterClass="kwsResultManageVO">
+		<selectKey resultClass="java.lang.String" keyProperty="resultDetailSn">
+			SELECT IFNULL(MAX(CAST(RESULT_DETAIL_SN AS SIGNED)), 0) + 1 AS RESULT_DETAIL_SN FROM RESULT_DETAIL
+		</selectKey>
+		INSERT INTO RESULT_DETAIL 
+		(
+			RESULT_DETAIL_SN, 
+			RESULT_MASTER_SN, 
+			GUBUN_ONE, 
+			GUBUN_TWO, 
+			GUBUN_THREE, 
+			WEIGHT, 
+			SILWHAJU, 
+			FWD, 
+			VOLUME_TOTAL, 
+			TEU, 
+			COUNT, 
+			PROFIT_USD, 
+			TOTAL_ONE, 
+			TOTAL_TWO, 
+			TOTAL_THREE, 
+			TOTAL_FOUR, 
+			TOTAL_FIVE, 
+			TOTAL_SIX, 
+			TOTAL_SEVEN, 
+			DELETE_YN, 
+			FRST_REGIST_DT, 
+			FRST_REGIST_ID, 
+			FRST_REGIST_IP, 
+			LAST_UPDT_DT, 
+			LAST_UPDT_ID, 
+			LAST_UPDT_IP
+		)
+		VALUES
+		(
+			#resultDetailSn#, 
+			#resultMasterSn#, 
+			IFNULL(#gubunOne#, ''), 
+			IFNULL(#gubunTwo#, ''), 
+			IFNULL(#gubunThree#, ''), 
+			IFNULL(#weight#, ''), 
+			IFNULL(#silwhaju#, ''), 
+			IFNULL(#fwd#, ''), 
+			IFNULL(#volumeTotal#, ''), 
+			IFNULL(#teu#, ''), 
+			IFNULL(#count#, ''), 
+			IFNULL(#profitUsd#, ''), 
+			IFNULL(#totalOne#, ''), 
+			IFNULL(#totalTwo#, ''), 
+			IFNULL(#totalThree#, ''), 
+			IFNULL(#totalFour#, ''), 
+			IFNULL(#totalFive#, ''), 
+			IFNULL(#totalSix#, ''), 
+			IFNULL(#totalSeven#, ''), 
+			'N', 
+			now(), 
+			#frstRegistId#, 
+			#frstRegistIp#, 
+			now(), 
+			#lastUpdtId#, 
+			#lastUpdtIp#
+		)
+	</insert>
+	
+	<!-- 실적 현재 마스터 일련번호 구하기  -->
+	<select id="kwsResultManageVO.getResultMasterSn" parameterClass="kwsResultManageVO" resultClass="java.lang.String">
+	<![CDATA[
+	 	SELECT IFNULL(MAX(RESULT_MASTER_SN), 0) AS RESULT_MASTER_SN FROM RESULT_MASTER
+	]]>
+	</select>
+	
+	<!-- 실적 마스터 삭제 -->
+	<delete id="kwsResultManageVO.resultMasterDelete" parameterClass="kwsResultManageVO">
+		DELETE FROM RESULT_MASTER
+		WHERE RESULT_MASTER_SN = #resultMasterSn#
+	</delete>
+	
+	<!-- 실적 상세 삭제 -->
+	<delete id="kwsResultManageVO.resultDetailDelete" parameterClass="kwsResultManageVO">
+		DELETE FROM RESULT_DETAIL
+		WHERE RESULT_MASTER_SN = #resultMasterSn#
+	</delete>
+	
+	<!-- 비교할 실적 상세 조회 -->
+	<select id="kwsResultManageVO.resultCompareView" parameterClass="kwsResultManageVO" resultClass="egovMap">
+	<![CDATA[
+	 	SELECT 
+			RESULT_DETAIL_SN, 
+			RESULT_MASTER_SN, 
+			GUBUN_ONE, 
+			GUBUN_TWO, 
+			GUBUN_THREE, 
+			TRUNCATE(WEIGHT, 2) WEIGHT, 
+			TRUNCATE(SILWHAJU, 2) SILWHAJU, 
+			TRUNCATE(FWD, 2) FWD, 
+			TRUNCATE(VOLUME_TOTAL, 2) VOLUME_TOTAL, 
+			TRUNCATE(TEU, 2) TEU, 
+			TRUNCATE(COUNT, 2) COUNT, 
+			TRUNCATE(PROFIT_USD, 2) PROFIT_USD, 
+			TRUNCATE(TOTAL_ONE, 2) TOTAL_ONE, 
+			TRUNCATE(TOTAL_TWO, 2) TOTAL_TWO, 
+			TRUNCATE(TOTAL_THREE, 2) TOTAL_THREE, 
+			TRUNCATE(TOTAL_FOUR, 2) TOTAL_FOUR, 
+			TRUNCATE(TOTAL_FIVE, 2) TOTAL_FIVE, 
+			TRUNCATE(TOTAL_SIX, 2) TOTAL_SIX, 
+			TRUNCATE(TOTAL_SEVEN, 2) TOTAL_SEVEN, 
+			ALL_TOTAL, 
+			DELETE_YN, 
+			DATE_FORMAT(FRST_REGIST_DT, '%Y-%m-%d') FRST_REGIST_DT, 
+			FRST_REGIST_ID, 
+			FRST_REGIST_IP, 
+			LAST_UPDT_DT, 
+			LAST_UPDT_ID, 
+			LAST_UPDT_IP
+		FROM RESULT_DETAIL
+		WHERE RESULT_MASTER_SN = (SELECT RESULT_MASTER_SN FROM RESULT_MASTER WHERE REGIST_YEAR = #registYear# AND REGIST_MONTH = #registMonth#)
+		AND DELETE_YN = 'N'
+		ORDER BY CONVERT(RESULT_DETAIL_SN, UNSIGNED) ASC;
+	]]>
+	</select>
+	
+</sqlMap>

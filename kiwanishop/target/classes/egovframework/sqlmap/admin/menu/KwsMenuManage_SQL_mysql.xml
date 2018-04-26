@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Menu">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="kwsMenuManageVO" type="egovframework.admin.menu.service.KwsMenuManageVO"/>
+
+	<select id="menuManageDAO.selectMenuList" parameterClass="kwsMenuManageVO" resultClass="egovMap">
+		<![CDATA[
+			SELECT
+				A.MENU_CODE, 
+				A.MENU_DEPTH, 
+				A.MENU_NM, 
+				A.MENU_EXPLAIN, 
+				A.AUTH_CHECK, 
+				A.OPEN_YN, 
+				A.USE_GUBUN, 
+				A.MENU_URL,
+				A.FRST_REGIST_DT, 
+				A.FRST_REGIST_ID, 
+				A.FRST_REGIST_IP, 
+				A.LAST_UPDT_DT, 
+				A.LAST_UPDT_ID, 
+				A.LAST_UPDT_IP,
+				(
+					SELECT COUNT(MENU_CODE)
+					FROM MENU_MASTER 
+					WHERE MENU_DEPTH = (A.MENU_DEPTH + 1)
+					AND 
+					CASE A.MENU_DEPTH
+					WHEN '1' THEN SUBSTRING(MENU_CODE, 1, 4) = SUBSTRING(A.MENU_CODE, 1, 4) 
+					WHEN '2' THEN SUBSTRING(MENU_CODE, 1, 8) = SUBSTRING(A.MENU_CODE, 1, 8) 
+					WHEN '3' THEN SUBSTRING(MENU_CODE, 1, 12) = SUBSTRING(A.MENU_CODE, 1, 12) 
+					WHEN '4' THEN SUBSTRING(MENU_CODE, 1, 16) = SUBSTRING(A.MENU_CODE, 1, 16) 
+					END
+				) CNT
+			FROM MENU_MASTER A
+			WHERE 1=1
+		]]>
+		<isNotEmpty prepend="AND" property="useGubun">
+			USE_GUBUN = #useGubun#
+		</isNotEmpty>
+		<![CDATA[
+			ORDER BY MENU_CODE ASC
+		]]>
+	</select>
+	
+	<select id="menuManageDAO.selectMenuView" parameterClass="kwsMenuManageVO" resultClass="egovMap">
+		<![CDATA[
+			SELECT
+				MENU_CODE, 
+				MENU_DEPTH, 
+				MENU_NM, 
+				MENU_EXPLAIN, 
+				AUTH_CHECK, 
+				OPEN_YN, 
+				USE_GUBUN, 
+				MENU_URL,
+				FRST_REGIST_DT, 
+				FRST_REGIST_ID, 
+				FRST_REGIST_IP, 
+				LAST_UPDT_DT, 
+				LAST_UPDT_ID, 
+				LAST_UPDT_IP
+			FROM MENU_MASTER 
+			WHERE MENU_CODE = #menuCode#;
+		]]>
+	</select>
+	
+	<insert id="menuManageDAO.insertMenu" parameterClass="kwsMenuManageVO">
+		INSERT INTO MENU_MASTER 
+		(
+			MENU_CODE, 
+			MENU_DEPTH, 
+			MENU_NM, 
+			MENU_EXPLAIN, 
+			AUTH_CHECK, 
+			OPEN_YN, 
+			USE_GUBUN, 
+			MENU_URL,
+			FRST_REGIST_DT, 
+			FRST_REGIST_ID, 
+			FRST_REGIST_IP, 
+			LAST_UPDT_DT, 
+			LAST_UPDT_ID, 
+			LAST_UPDT_IP
+		)
+		VALUES
+		(
+			#menuCode#, 
+			#menuDepth#, 
+			#menuNm#, 
+			#menuExplain#, 
+			#authCheck#, 
+			#openYn#, 
+			#useGubun#, 
+			#menuUrl#,
+			now(), 
+			#frstRegistId#, 
+			#frstRegistIp#, 
+			now(), 
+			#lastUpdtId#, 
+			#lastUpdtIp#
+		)
+	</insert>
+	
+	<update id="menuManageDAO.updateMenu" parameterClass="kwsMenuManageVO">
+		UPDATE MENU_MASTER 
+		SET
+			MENU_NM = #menuNm# , 
+			MENU_EXPLAIN = #menuExplain# , 
+			AUTH_CHECK = #authCheck# , 
+			OPEN_YN = #openYn# , 
+			MENU_URL = #menuUrl#,
+			FRST_REGIST_DT = now() , 
+			FRST_REGIST_ID = #frstRegistId# , 
+			FRST_REGIST_IP = #frstRegistIp# , 
+			LAST_UPDT_DT = now() , 
+			LAST_UPDT_ID = #lastUpdtId# , 
+			LAST_UPDT_IP = #lastUpdtIp#
+		WHERE
+		MENU_CODE = #menuCode# 
+	</update>
+	
+	<delete id="menuManageDAO.deleteMenu" parameterClass="kwsMenuManageVO">
+		DELETE FROM MENU_MASTER 
+		WHERE
+		MENU_CODE = #menuCode# 
+	</delete>
+	
+	<select id="menuManageDAO.getMenuDepthMax" parameterClass="kwsMenuManageVO" resultClass="java.lang.String">
+		<![CDATA[
+			SELECT 
+				IFNULL(MAX(CONVERT(SUBSTRING(MENU_CODE, #startNum#, #endNum#), UNSIGNED)) + 1, '0001') AS MENU_CODE
+			FROM MENU_MASTER
+			WHERE 1=1
+		]]>
+		<isNotEmpty prepend="AND" property="menuDepth">
+			<isEqual property="menuDepth" compareValue="2">
+				SUBSTRING(MENU_CODE, 1, 4) = #menuCode#
+			</isEqual>
+			<isEqual property="menuDepth" compareValue="3">
+				SUBSTRING(MENU_CODE, 1, 8) = #menuCode#
+			</isEqual>
+			<isEqual property="menuDepth" compareValue="4">
+				SUBSTRING(MENU_CODE, 1, 12) = #menuCode#
+			</isEqual>
+		</isNotEmpty>
+	</select>
+	
+	<select id="menuManageDAO.ajaxSelectMenu" parameterClass="kwsMenuManageVO" resultClass="egovMap">
+		<![CDATA[
+			SELECT
+		]]>
+			<isNotEmpty prepend="" property="menuDepth">
+				<isNotEmpty prepend="" property="minusGubun">
+					CASE MENU_DEPTH
+						WHEN '1' THEN SUBSTRING(MENU_CODE, 1, 4)
+						WHEN '2' THEN SUBSTRING(MENU_CODE, 1, 8)
+						WHEN '3' THEN SUBSTRING(MENU_CODE, 1, 12)
+						WHEN '4' THEN SUBSTRING(MENU_CODE, 1, 16)
+					END
+					MENU_CODE
+				</isNotEmpty>
+				<isEmpty prepend="" property="minusGubun">
+					<isEqual property="menuDepth" compareValue="1">
+						DISTINCT SUBSTRING(MENU_CODE, 1, 8) MENU_CODE
+					</isEqual>
+					<isEqual property="menuDepth" compareValue="2">
+						DISTINCT SUBSTRING(MENU_CODE, 1, 12) MENU_CODE
+					</isEqual>
+					<isEqual property="menuDepth" compareValue="3">
+						DISTINCT SUBSTRING(MENU_CODE, 1, 16) MENU_CODE
+					</isEqual>
+				</isEmpty>
+			</isNotEmpty>
+		<![CDATA[
+			FROM MENU_MASTER 
+			WHERE 1=1
+		]]>
+		<isNotEmpty prepend="AND" property="menuDepth">
+			<isEqual property="menuDepth" compareValue="1">
+				SUBSTRING(MENU_CODE, 1, 4) = #menuCode#
+			</isEqual>
+			<isEqual property="menuDepth" compareValue="2">
+				SUBSTRING(MENU_CODE, 1, 8) = #menuCode#
+			</isEqual>
+			<isEqual property="menuDepth" compareValue="3">
+				SUBSTRING(MENU_CODE, 1, 12) = #menuCode#
+			</isEqual>
+		</isNotEmpty>
+	</select>
+	
+	<select id="menuManageDAO.ajaxMenuMaxMin" parameterClass="kwsMenuManageVO" resultClass="java.lang.String">
+		<![CDATA[
+			SELECT
+		]]>
+				<isEqual property="menuMaxMin" compareValue="max">
+					SUBSTRING(MAX(MENU_CODE),1,4) MENU_CODE
+				</isEqual>
+				<isEqual property="menuMaxMin" compareValue="min">
+					SUBSTRING(MIN(MENU_CODE),1,4) MENU_CODE
+				</isEqual>
+		<![CDATA[
+			FROM MENU_MASTER 
+			WHERE USE_GUBUN = #useGubun#
+			AND SUBSTRING(MENU_CODE, 5, 12) = '000000000000'
+		]]>
+	</select>
+	
+	<select id="menuManageDAO.getMenuDepthOne" parameterClass="kwsMenuManageVO" resultClass="java.lang.String">
+		<![CDATA[
+			SELECT
+		]]>
+				<isEqual property="menuMaxMin" compareValue="max">
+					SUBSTRING(MIN(MENU_CODE),1,4) MENU_CODE
+				</isEqual>
+				<isEqual property="menuMaxMin" compareValue="min">
+					SUBSTRING(MAX(MENU_CODE),1,4) MENU_CODE
+				</isEqual>
+		<![CDATA[
+			FROM MENU_MASTER 
+			WHERE USE_GUBUN = #useGubun#
+			AND SUBSTRING(MENU_CODE, 5, 12) = '000000000000'
+		]]>
+			<isEqual property="menuMaxMin" compareValue="max">
+				AND CONVERT(#menuCode#, SIGNED) &lt; CONVERT(SUBSTRING(MENU_CODE, 1, 4), SIGNED);
+			</isEqual>
+			<isEqual property="menuMaxMin" compareValue="min">
+				AND CONVERT(#menuCode#, SIGNED) &gt; CONVERT(SUBSTRING(MENU_CODE, 1, 4), SIGNED);
+			</isEqual>
+	</select>
+	
+	<select id="menuManageDAO.getMenuDepthOneList" parameterClass="kwsMenuManageVO" resultClass="egovMap">
+		<![CDATA[
+			SELECT MENU_CODE
+			FROM MENU_MASTER 
+			WHERE USE_GUBUN = #useGubun#
+			AND SUBSTRING(MENU_CODE, 1, 4) = #menuCode#
+		]]>
+	</select>
+	
+	<update id="menuManageDAO.updateMenuChange" parameterClass="kwsMenuManageVO">
+		UPDATE MENU_MASTER 
+		SET
+			MENU_CODE = #menuCodeChange# , 
+			LAST_UPDT_DT = now() , 
+			LAST_UPDT_ID = #lastUpdtId# , 
+			LAST_UPDT_IP = #lastUpdtIp#
+		WHERE
+		MENU_CODE = #menuCode# 
+	</update>
+	
+</sqlMap>

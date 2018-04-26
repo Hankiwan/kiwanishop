@@ -1,0 +1,43 @@
+/***********
+Author : 김광성
+Version : 1.0
+************/
+
+
+/***** 레이아웃 *****/
+#admin_totalLayout {width:1000px; position:relative; margin:0 auto; text-align:left;}
+#admin_header {width:1000px; height:111px; background:url('../images/common/admin/admin_gnb_bg.jpg') no-repeat 0 0; margin:0 0 24px 0;}
+#admin_wrap {width:1000px; position:relative; clear:both;}
+#admin_leftMenu {width:186px; height:560px; margin:8px 36px 70px 9px; position:relative; float:left; display:inline;}
+#admin_footer {width:976px; height:50px; margin:40px 0 0 h; clear:both; background:url('../images/common/admin/admin_footbg.gif') no-repeat 0 0;}
+#admin_footer p {padding:20px 0 0 30px;}
+
+
+/***** GNB *****/
+.admin_logo {height:50px; float:left; margin:6px 0 0 35px; display:inline;}
+.admin_gnbMenu {width:670px; height:50px; margin:33px 0 0 160px; float:left; display:inline;}
+#admin_gnbList {width:670px; position:relative;}
+#admin_gnbList .admin_gnbMenuList {width:900px; float:left;}
+#admin_gnbList .admin_gnbMenuList li {float:left; padding:0 0 0 20px; color:#CDCBCB;}
+.admin_comment {font-size:0.9em; color:#ffffff; clear:both; padding:0 0 0 35px;}
+
+
+/***** LNB *****/
+.admin_lnbTit {font-size:1.4em; color:#e1185c; font-weight:bold; text-align:center; height:30px; line-height:1.0em; vertical-align:top;}
+
+
+/***** Title *****/
+.admin_history {width:350px; font-size:0.9em; text-align:right; height:13px; float:right;}
+
+
+/***** login *****/
+#admin_loginbg {width:100%; background:url('../images/common/admin/login_bg.gif') repeat-x 0 0; background-color:#E6E6E9;}
+#admin_loginArea {width:538px; height:auto; margin:0 auto;}
+.adminLogo {margin:248px 0 5px 16px; width:522px;}
+.admin_roundMid {width:522px; overflow:hidden; background:url('../images/common/admin/roundbox_mid.gif') repeat-y 0 0; padding:29px 0 10px 16px;}
+.admin_loginVisual {width:178px; height:121px; float:left; background:url('../images/common/admin/admin_visual_img.gif') repeat-y 0 0;}
+.admin_loginInput {width:300px; height:121px; float:left;}
+
+
+/***** foot *****/
+.admin_loginFoot {text-align:center; margin:5px 0 0 0; color:#666666; font-size:0.9em;}

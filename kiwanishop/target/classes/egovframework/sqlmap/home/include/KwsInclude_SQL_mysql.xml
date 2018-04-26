@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Include">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="kwsIncludeVO" type="egovframework.home.common.include.service.KwsIncludeVO"/>
+	<typeAlias  alias="kwsMenuVO" type="egovframework.home.menu.service.KwsMenuVO"/>
+
+	<select id="includeDAO.menuGnbList" parameterClass="kwsMenuVO" resultClass="egovMap">
+		<![CDATA[
+			SELECT
+				MENU_CODE, 
+				MENU_DEPTH, 
+				MENU_NM, 
+				MENU_EXPLAIN, 
+				AUTH_CHECK, 
+				OPEN_YN, 
+				USE_GUBUN, 
+				MENU_URL,
+				FRST_REGIST_DT, 
+				FRST_REGIST_ID, 
+				FRST_REGIST_IP, 
+				LAST_UPDT_DT, 
+				LAST_UPDT_ID, 
+				LAST_UPDT_IP
+			FROM MENU_MASTER 
+			WHERE USE_GUBUN = 'front'
+			AND OPEN_YN = 'Y'
+			AND SUBSTRING(MENU_CODE, 5, 12) = '000000000000' 
+			ORDER BY MENU_CODE ASC
+		]]>
+	</select>
+	
+	<select id="includeDAO.menuGnbListCnt" parameterClass="kwsMenuVO" resultClass="java.lang.Integer">
+		<![CDATA[
+			SELECT
+				COUNT(MENU_CODE) 
+			FROM MENU_MASTER
+			WHERE USE_GUBUN = 'front'
+			AND OPEN_YN = 'Y'
+			AND SUBSTRING(MENU_CODE, 5, 12) = '000000000000' 
+		]]>
+	</select>
+	
+	<select id="includeDAO.menuLnbList" parameterClass="kwsIncludeVO" resultClass="egovMap">
+		<![CDATA[
+			SELECT
+				MENU_CODE, 
+				MENU_DEPTH, 
+				MENU_NM, 
+				MENU_EXPLAIN, 
+				AUTH_CHECK, 
+				OPEN_YN, 
+				USE_GUBUN, 
+				MENU_URL,
+				FRST_REGIST_DT, 
+				FRST_REGIST_ID, 
+				FRST_REGIST_IP, 
+				LAST_UPDT_DT, 
+				LAST_UPDT_ID, 
+				LAST_UPDT_IP
+			FROM MENU_MASTER 
+			WHERE USE_GUBUN = 'front'
+			AND OPEN_YN = 'Y'
+			AND SUBSTRING(MENU_CODE, 1, 4) = SUBSTRING(#gnbMenuCd#, 1, 4)
+			AND SUBSTRING(MENU_CODE, 5, 12) <> '000000000000' 
+			ORDER BY MENU_CODE ASC
+		]]>
+	</select>
+	
+	<select id="includeDAO.menuFirstNm" parameterClass="kwsIncludeVO" resultClass="java.lang.String">
+		<![CDATA[
+			SELECT MENU_NM
+			FROM MENU_MASTER
+			WHERE USE_GUBUN = 'front'
+			AND OPEN_YN = 'Y' 
+			AND MENU_CODE = CONCAT(SUBSTRING(#gnbMenuCd#, 1, 4), '000000000000')
+		]]>
+	</select>
+	
+	<select id="includeDAO.minMenuCode" parameterClass="kwsIncludeVO" resultClass="java.lang.String">
+		<![CDATA[
+			SELECT MIN(MENU_CODE)
+			FROM MENU_MASTER
+			WHERE USE_GUBUN = 'front'
+			AND OPEN_YN = 'Y' 
+		]]>
+	</select>
+	
+</sqlMap>

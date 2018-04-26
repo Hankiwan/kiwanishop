@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Code">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="kwsCodeManageVO" type="egovframework.admin.code.service.KwsCodeManageVO"/>
+
+	<select id="codeManageDAO.selectCodeList" parameterClass="kwsCodeManageVO" resultClass="egovMap">
+		<![CDATA[
+			SELECT
+				CODE_SN, 
+				CODE_ID, 
+				CODE_NM, 
+				DATE_FORMAT(FRST_REGIST_DT, '%Y-%m-%d') FRST_REGIST_DT, 
+				FRST_REGIST_ID, 
+				FRST_REGIST_IP, 
+				LAST_UPDT_DT, 
+				LAST_UPDT_ID, 
+				LAST_UPDT_IP, 
+				CODE_DC, 
+				USE_YN
+			FROM CODE 
+			WHERE 1=1
+		]]>
+		<isNotEmpty prepend="AND" property="searchValue">
+			<isEqual property="searchType" compareValue="codeId">
+				<![CDATA[ CODE_ID = #searchValue# ]]>
+			</isEqual>
+			<isEqual property="searchType" compareValue="codeNm">
+				<![CDATA[ CODE_NM = #searchValue# ]]>
+			</isEqual>
+		</isNotEmpty>
+		<![CDATA[
+			ORDER BY FRST_REGIST_DT DESC
+			LIMIT #firstIndex#, #recordCountPerPage#
+		]]>
+	</select>
+	
+	<select id="codeManageDAO.selectCodeCnt" parameterClass="kwsCodeManageVO" resultClass="java.lang.Integer">
+		<![CDATA[
+			SELECT
+				COUNT(CODE_SN)
+			FROM CODE 
+			WHERE 1=1
+		]]>
+		<isNotEmpty prepend="AND" property="searchValue">
+			<isEqual property="searchType" compareValue="codeId">
+				<![CDATA[ CODE_ID = #searchValue# ]]>
+			</isEqual>
+			<isEqual property="searchType" compareValue="codeNm">
+				<![CDATA[ CODE_NM = #searchValue# ]]>
+			</isEqual>
+		</isNotEmpty>
+	</select>
+	
+	<select id="codeManageDAO.selectCodeView" parameterClass="kwsCodeManageVO" resultClass="egovMap">
+		<![CDATA[
+			SELECT
+				CODE_SN, 
+				CODE_ID, 
+				CODE_NM, 
+				FRST_REGIST_DT, 
+				FRST_REGIST_ID, 
+				FRST_REGIST_IP, 
+				LAST_UPDT_DT, 
+				LAST_UPDT_ID, 
+				LAST_UPDT_IP, 
+				CODE_DC, 
+				USE_YN
+			FROM CODE 
+			WHERE CODE_SN = #codeSn#;
+		]]>
+	</select>
+	
+	<insert id="codeManageDAO.insertCode" parameterClass="kwsCodeManageVO">
+		<selectKey resultClass="java.lang.String" keyProperty="codeSn">
+			SELECT IFNULL(MAX(CAST(CODE_SN AS SIGNED)), 0) + 1 AS CODE_SN FROM CODE
+		</selectKey>
+		INSERT INTO CODE 
+		(
+			CODE_SN, 
+			CODE_ID, 
+			CODE_NM, 
+			FRST_REGIST_DT, 
+			FRST_REGIST_ID, 
+			FRST_REGIST_IP, 
+			LAST_UPDT_DT, 
+			LAST_UPDT_ID, 
+			LAST_UPDT_IP, 
+			CODE_DC, 
+			USE_YN
+		)
+		VALUES
+		(
+			#codeSn#, 
+			#codeId#, 
+			#codeNm#, 
+			now(), 
+			#frstRegistId#, 
+			#frstRegistIp#, 
+			now(), 
+			#lastUpdtId#, 
+			#lastUpdtIp#, 
+			#codeDc#, 
+			#useYn#
+		);
+	</insert>
+	
+	<update id="codeManageDAO.updateCode" parameterClass="kwsCodeManageVO">
+		UPDATE CODE 
+		SET
+			CODE_NM = #codeNm# , 
+			LAST_UPDT_DT = now() , 
+			LAST_UPDT_ID = #lastUpdtId# , 
+			LAST_UPDT_IP = #lastUpdtIp# , 
+			CODE_DC = #codeDc# , 
+			USE_YN = #useYn#
+		WHERE
+			CODE_SN = #codeSn#; 
+	</update>
+	
+	<delete id="codeManageDAO.deleteCode" parameterClass="kwsCodeManageVO">
+		DELETE FROM CODE 
+		WHERE
+		CODE_SN = #codeSn# 
+	</delete>
+	
+	<select id="codeManageDAO.idOverlapChk" parameterClass="kwsCodeManageVO" resultClass="java.lang.Integer">
+		<![CDATA[
+			SELECT COUNT(CODE_ID)
+			FROM CODE
+			WHERE CODE_ID = #codeId#
+		]]>
+	</select>
+	
+	<select id="codeManageDAO.codeList" parameterClass="kwsCodeManageVO" resultClass="egovMap">
+		<![CDATA[
+			SELECT
+				CODE_SN, 
+				CODE_ID, 
+				CODE_NM, 
+				DATE_FORMAT(FRST_REGIST_DT, '%Y-%m-%d') FRST_REGIST_DT, 
+				FRST_REGIST_ID, 
+				FRST_REGIST_IP, 
+				LAST_UPDT_DT, 
+				LAST_UPDT_ID, 
+				LAST_UPDT_IP, 
+				CODE_DC, 
+				USE_YN
+			FROM CODE 
+			WHERE CODE_ID = #codeId#
+			ORDER BY CONVERT(CODE_SN, UNSIGNED) ASC
+		]]>
+	</select>
+	
+</sqlMap>

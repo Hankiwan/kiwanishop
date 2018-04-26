@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Login">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="kwsLoginVO" type="egovframework.home.login.service.KwsLoginVO"/>
+
+	<select id="loginDAO.memberChk" parameterClass="kwsLoginVO" resultClass="java.lang.Integer">
+		<![CDATA[
+			SELECT
+				count(*) cnt
+			FROM MEMBER 
+			WHERE USER_ID = #userId#
+			AND PASSWD = #passwd# 
+		]]>
+	</select>
+	
+</sqlMap>

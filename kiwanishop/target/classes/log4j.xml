@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration 
+    xmlns:log4j="http://jakarta.apache.org/log4j/" 
+    debug="false">
+    
+    <appender name="console" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %5p [%c] %m%n" />
+        </layout>   
+        <filter class="org.apache.log4j.varia.StringMatchFilter">
+	      <param name="StringToMatch" value="Result" />
+	      <param name="AcceptOnMatch" value="false" />
+	    </filter>
+    </appender>
+    
+    <appender name="file" class="org.apache.log4j.DailyRollingFileAppender">
+		 <param name="append" value="true"/>
+         <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+         <param name="file" value="C:\kiwanishop\logs\portal.log "/>
+         <layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy.M.d. a h:mm:ss} %l %n%p : %m%n" />
+         </layout>
+    </appender>
+    
+    <logger name="egovframework" additivity="false">
+        <level value="ERROR"/>
+        <appender-ref ref="console"/>
+        <appender-ref ref="file"/>
+    </logger>
+
+	<!-- log SQL with timing information, post execution -->
+	<logger name="jdbc.sqltiming" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="console" />
+		<appender-ref ref="file"/>
+	</logger>
+	
+	<logger name="org.springframework" additivity="false">
+		<level value="ERROR" />
+		<appender-ref ref="console" />
+		<appender-ref ref="file"/>
+	</logger>
+	
+	<logger name="com.ibatis">
+		<level value="DEBUG"/>
+		<appender-ref ref="console" />
+		<appender-ref ref="file"/>
+	</logger>
+
+	<logger name="java.sql">
+		<level value="DEBUG"/>
+		<appender-ref ref="console" />
+		<appender-ref ref="file"/>
+	</logger>
+	
+	<root>
+		<level value="ERROR" />
+		<appender-ref ref="console" />
+		<appender-ref ref="file"/>
+	</root>
+	                   
+</log4j:configuration>
