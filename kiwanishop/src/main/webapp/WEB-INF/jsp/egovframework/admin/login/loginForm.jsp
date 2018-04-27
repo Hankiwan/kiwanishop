@@ -30,6 +30,7 @@
 <link rel="stylesheet" type="text/css" href="/static/admin/css/unification.css" />
 <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css" />
 <script type="text/javascript" src="/static/admin/js/jquery.js"></script>
+<script type="text/javascript" src="/static/admin/js/util.js"></script>
 <script type="text/javascript">
 	
 	jQuery(document).ready(function(){
@@ -37,6 +38,14 @@
  			alert("${msg}");
  		}
  		jQuery("#userId").focus();
+ 		
+ 		jQuery("#userId").val(getCookie("SAVEID"));
+ 		
+ 		if(getCookie("SAVEID") != null && jQuery.trim(getCookie("SAVEID")) != ""){
+ 			jQuery("#saveId").prop("checked", true);
+ 		}else{
+ 			jQuery("#saveId").prop("checked", false);
+ 		}
 	});
 
 	function fn_login(){
@@ -51,6 +60,12 @@
 			return;
 		}
 		
+		if(jQuery("#saveId").is(":checked") == true){	//아이디 저장
+			setCookie("SAVEID", jQuery("#userId").val(), 365);
+		}else{
+			setCookie("SAVEID", "", -1);
+		}
+		
 		jQuery("#mainForm").attr("action", "/admin/login/login.do");
 		jQuery("#mainForm").submit();
 	}
@@ -60,6 +75,8 @@
 	    if (e.keyCode == 13)
 	    	fn_login();
 	}
+	
+	
 </script>
 
 </head>
@@ -92,6 +109,9 @@
 								<tr>
 									<td class="loginBlt"><label for="passwd">비밀번호</label></td>
 									<td><input type="password" name="passwd" id="passwd" class="inputBox_08" size="" tabindex="2" value="" maxlength="20" onKeyDown="fncEnter(this,event)" /></td>
+								</tr>
+								<tr>
+									<td colspan="2" style="padding-left:132px;">아이디 저장 <input type="checkbox" name="saveId" id="saveId" style="vertical-align:middle;" /></td>
 								</tr>
 							</tbody>
 						</table>
