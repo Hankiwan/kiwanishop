@@ -48,6 +48,7 @@
 			<legend>메뉴관리 상세</legend>
 			<form name="menuForm" id="menuForm" method="post" >
 				<input type="hidden" name="menuCode" id="menuCode" />
+				<input type="hidden" name="useGubun" id="useGubun" value="${searchVO.useGubun }" />
 				<!-- 메뉴 코드 공통 start -->
 				<input type="hidden" name="gnbMenuCd" id="gnbMenuCd" value="${searchVO.gnbMenuCd }" />
 				<!-- 메뉴 코드 공통 end -->  

@@ -78,7 +78,18 @@ public class KwsMenuManageVO extends KwsPageVO {
 	/** 메뉴 바꿀 코드값 */
 	private String menuCodeChange;
 	
+	/** 사용자, 관리자 메뉴 구분(페이지 파라미터 구분) */
+	private String useGubunP;
 	
+	
+
+	public String getUseGubunP() {
+		return useGubunP;
+	}
+
+	public void setUseGubunP(String useGubunP) {
+		this.useGubunP = useGubunP;
+	}
 
 	public String getMenuCodeChange() {
 		return menuCodeChange;

@@ -76,6 +76,7 @@
 		<!-- 메뉴 코드 공통 start -->
 		<input type="hidden" name="gnbMenuCd" id="gnbMenuCd" value="${searchVO.gnbMenuCd }" />
 		<!-- 메뉴 코드 공통 end -->  
+		<input type="hidden" name="useGubunP" id="useGubunP" value="${searchVO.useGubun }" />
 		<div class="clear_b">
 			<fieldset>
 			<legend>메뉴 관리 등록</legend>

@@ -65,6 +65,7 @@
 	<!-- 메뉴 코드 공통 end -->  
 		<input type="hidden" name="authCheck" id="authCheck" />
 		<input type="hidden" name="menuCode" id="menuCode" value="${menuView.menuCode }" />
+		<input type="hidden" name="useGubunP" id="useGubunP" value="${searchVO.useGubun }" />
 		<div class="clear_b">
 			<fieldset>
 			<legend>메뉴 관리 수정</legend>

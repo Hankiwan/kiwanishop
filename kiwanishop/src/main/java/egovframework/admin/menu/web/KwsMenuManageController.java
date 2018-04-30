@@ -220,6 +220,7 @@ public class KwsMenuManageController {
 		
 		model.addAttribute("msg", msg);
 		model.addAttribute("gnbMenuCd", searchVO.getGnbMenuCd());
+		model.addAttribute("useGubun", searchVO.getUseGubunP());
 	
 		return "redirect:/admin/menu/menuList.do";
 	}
@@ -302,6 +303,7 @@ public class KwsMenuManageController {
     	
     	model.addAttribute("msg", msg);
     	model.addAttribute("gnbMenuCd", searchVO.getGnbMenuCd());
+    	model.addAttribute("useGubun", searchVO.getUseGubunP());
     	
     	return "redirect:/admin/menu/menuList.do";
 	}
@@ -328,6 +330,7 @@ public class KwsMenuManageController {
     	
     	model.addAttribute("msg", msg);
     	model.addAttribute("gnbMenuCd", searchVO.getGnbMenuCd());
+    	model.addAttribute("useGubun", searchVO.getUseGubun());
     	
     	return "redirect:/admin/menu/menuList.do";
 	}
