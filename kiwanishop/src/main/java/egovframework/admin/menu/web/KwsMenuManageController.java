@@ -8,11 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import egovframework.admin.code.service.KwsCodeManageService;
 import egovframework.admin.code.service.KwsCodeManageVO;
@@ -73,13 +73,6 @@ public class KwsMenuManageController {
 			ModelMap model, HttpServletRequest request)
 			throws Exception {
 		
-			// 로그인체크
-	    	if(!kwsLoginManageService.isLogin(request)) {
-	    	       model.addAttribute("msg", egovMessageSource.getMessage("Com.text.login.fail"));
-	    	       model.addAttribute("searchVO", new KwsMenuManageVO());
-	    	      return "/admin/login/loginForm";
-	    	}
-	    	
 	    	if("".equals(Util.isNull(searchVO.getUseGubun()))){
 	    		searchVO.setUseGubun("admin");
 	    	}
@@ -111,13 +104,6 @@ public class KwsMenuManageController {
 			ModelMap model, HttpServletRequest request)
 			throws Exception {
 		
-		// 로그인체크
-    	if(!kwsLoginManageService.isLogin(request)) {
-    	       model.addAttribute("msg", egovMessageSource.getMessage("Com.text.login.fail"));
-    	       model.addAttribute("searchVO", new KwsMenuManageVO());
-    	      return "/admin/login/loginForm";
-    	}
-    	
     	EgovMap view = kwsMenuManageService.selectMenuView(searchVO);
     	model.addAttribute("menuView", view);
     	
@@ -136,13 +122,6 @@ public class KwsMenuManageController {
 			ModelMap model, HttpServletRequest request)
 			throws Exception {
 		
-		// 로그인체크
-    	if(!kwsLoginManageService.isLogin(request)) {
-    	       model.addAttribute("msg", egovMessageSource.getMessage("Com.text.login.fail"));
-    	       model.addAttribute("searchVO", new KwsMenuManageVO());
-    	      return "/admin/login/loginForm";
-    	}
-    	
     	if(!"".equals(Util.isNull(searchVO.getMenuCode()))){	//2뎁스 이상에서 등록폼으로 들어왔을 경우
     		EgovMap view = kwsMenuManageService.selectMenuView(searchVO);
         	model.addAttribute("menuView", view);    		
@@ -171,13 +150,6 @@ public class KwsMenuManageController {
 			ModelMap model, HttpServletRequest request)
 			throws Exception {
 		
-		// 로그인체크
-    	if(!kwsLoginManageService.isLogin(request)) {
-    	       model.addAttribute("msg", egovMessageSource.getMessage("Com.text.login.fail"));
-    	       model.addAttribute("searchVO", new KwsMenuManageVO());
-    	      return "/admin/login/loginForm";
-    	}
-    	
     	HttpSession session = request.getSession();
     	
     	String userId = (String)session.getAttribute("sAdminId");	//아이디
@@ -254,13 +226,6 @@ public class KwsMenuManageController {
 			ModelMap model, HttpServletRequest request)
 			throws Exception {
 		
-		// 로그인체크
-    	if(!kwsLoginManageService.isLogin(request)) {
-    	       model.addAttribute("msg", egovMessageSource.getMessage("Com.text.login.fail"));
-    	       model.addAttribute("searchVO", new KwsMenuManageVO());
-    	      return "/admin/login/loginForm";
-    	}
-    	
     	EgovMap view = kwsMenuManageService.selectMenuView(searchVO);
     	model.addAttribute("menuView", view);
     	
@@ -284,12 +249,6 @@ public class KwsMenuManageController {
 	public String update(@ModelAttribute("searchVO") KwsMenuManageVO searchVO,
 			ModelMap model, HttpServletRequest request)
 			throws Exception{
-		// 로그인체크
-    	if(!kwsLoginManageService.isLogin(request)) {
-    	       model.addAttribute("msg", egovMessageSource.getMessage("Com.text.login.fail"));
-    	       model.addAttribute("searchVO", new KwsMenuManageVO());
-    	      return "/admin/login/loginForm";
-    	}
     	
     	HttpSession session = request.getSession();
     	
@@ -319,12 +278,6 @@ public class KwsMenuManageController {
 	public String delete(@ModelAttribute("searchVO") KwsMenuManageVO searchVO,
 			ModelMap model, HttpServletRequest request)
 			throws Exception{
-		// 로그인체크
-    	if(!kwsLoginManageService.isLogin(request)) {
-    	       model.addAttribute("msg", egovMessageSource.getMessage("Com.text.login.fail"));
-    	       model.addAttribute("searchVO", new KwsMenuManageVO());
-    	      return "/admin/login/loginForm";
-    	}
     	
     	String msg = kwsMenuManageService.deleteMenu(searchVO);
     	
@@ -388,13 +341,6 @@ public class KwsMenuManageController {
 			ModelMap model, HttpServletRequest request)
 			throws Exception {
 		
-			// 로그인체크
-	    	if(!kwsLoginManageService.isLogin(request)) {
-	    	       model.addAttribute("msg", egovMessageSource.getMessage("Com.text.login.fail"));
-	    	       model.addAttribute("searchVO", new KwsMenuManageVO());
-	    	      return "/admin/login/loginForm";
-	    	}
-	    	
 	    	HttpSession session = request.getSession();
 			String userId = (String)session.getAttribute("sAdminId");	//아이디
 			searchVO.setLastUpdtId(userId);

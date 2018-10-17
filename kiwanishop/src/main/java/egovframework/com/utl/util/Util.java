@@ -65,7 +65,7 @@ public class Util {
         int count = 0;
         char c;
         int s=0;
-        for(s=0;s<tLen;s++){
+        for(s=0;s<tLen;s++){ 
             c = str.charAt(s);
             if(count > maxNum) break;
             if(c>127) count +=2;

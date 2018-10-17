@@ -51,13 +51,6 @@ public class KwsMainManageController {
 	public String main(@ModelAttribute("searchVO") KwsMainManageVO searchVO,
 			ModelMap model, HttpServletRequest request)
 			throws Exception {
-		
-		// 로그인체크
-    	if(!kwsLoginManageService.isLogin(request)) {
-    	       model.addAttribute("msg", egovMessageSource.getMessage("Com.text.login.fail"));
-    	       model.addAttribute("searchVO", new KwsResultManageVO());
-    	      return "/admin/login/loginForm";
-    	}
     	
     	model.addAttribute("msg", "mainChk");
 		

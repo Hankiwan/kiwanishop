@@ -64,8 +64,8 @@
 				</c:forEach>
 			</select>
 			<select name="searchType" class="link_select02" title="검색조건 선택" onchange="">
-				<option value="masterNm" <c:if test="${searchVO.searchType eq 'masterNm'}">selected</c:if>>게시판 이름</option>
-				<option value="masterCn" <c:if test="${searchVO.searchType eq 'masterCn'}">selected</c:if>>게시판 설명</option>
+				<option value="title" <c:if test="${searchVO.searchType eq 'title'}">selected</c:if>>제목</option>
+				<option value="boardCn" <c:if test="${searchVO.searchType eq 'boardCn'}">selected</c:if>>내용</option>
 			</select>
 			<input type="text" name="searchValue" class="inputBox" size="46" value="<c:out value="${searchVO.searchValue}" />" maxlength="20" title="검색어 입력" />
 			<a href="javascript:fncList();" title="검색하기"><img src="/static/admin/images/common/btn/btnc_search.gif" alt="검색하기" /></a>

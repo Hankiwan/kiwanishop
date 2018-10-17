@@ -67,13 +67,6 @@ public class KwsCodeManageController {
 			ModelMap model, HttpServletRequest request)
 			throws Exception {
 		
-			// 로그인체크
-	    	if(!kwsLoginManageService.isLogin(request)) {
-	    	       model.addAttribute("msg", egovMessageSource.getMessage("Com.text.login.fail"));
-	    	       model.addAttribute("searchVO", new KwsCodeManageVO());
-	    	      return "/admin/login/loginForm";
-	    	}
-	    	
 	    	searchVO.setPageUnit(propertyService.getInt("pageUnit"));
 	    	searchVO.setPageSize(propertyService.getInt("pageSize"));
 	    	
@@ -116,13 +109,6 @@ public class KwsCodeManageController {
 			ModelMap model, HttpServletRequest request)
 			throws Exception {
 		
-		// 로그인체크
-    	if(!kwsLoginManageService.isLogin(request)) {
-    	       model.addAttribute("msg", egovMessageSource.getMessage("Com.text.login.fail"));
-    	       model.addAttribute("searchVO", new KwsCodeManageVO());
-    	      return "/admin/login/loginForm";
-    	}
-    	
     	EgovMap view = kwsCodeManageService.selectCodeView(searchVO);
     	model.addAttribute("codeView", view);
     	
@@ -141,13 +127,6 @@ public class KwsCodeManageController {
 			ModelMap model, HttpServletRequest request)
 			throws Exception {
 		
-		// 로그인체크
-    	if(!kwsLoginManageService.isLogin(request)) {
-    	       model.addAttribute("msg", egovMessageSource.getMessage("Com.text.login.fail"));
-    	       model.addAttribute("searchVO", new KwsCodeManageVO());
-    	      return "/admin/login/loginForm";
-    	}
-		
 		return "/admin/code/codeRegist";
 	}
 	
@@ -163,13 +142,6 @@ public class KwsCodeManageController {
 			ModelMap model, HttpServletRequest request)
 			throws Exception {
 		
-		// 로그인체크
-    	if(!kwsLoginManageService.isLogin(request)) {
-    	       model.addAttribute("msg", egovMessageSource.getMessage("Com.text.login.fail"));
-    	       model.addAttribute("searchVO", new KwsCodeManageVO());
-    	      return "/admin/login/loginForm";
-    	}
-    	
     	HttpSession session = request.getSession();
     	
     	String userId = (String)session.getAttribute("sAdminId");	//아이디
@@ -200,13 +172,6 @@ public class KwsCodeManageController {
 			ModelMap model, HttpServletRequest request)
 			throws Exception {
 		
-		// 로그인체크
-    	if(!kwsLoginManageService.isLogin(request)) {
-    	       model.addAttribute("msg", egovMessageSource.getMessage("Com.text.login.fail"));
-    	       model.addAttribute("searchVO", new KwsCodeManageVO());
-    	      return "/admin/login/loginForm";
-    	}
-    	
     	EgovMap view = kwsCodeManageService.selectCodeView(searchVO);
     	model.addAttribute("codeView", view);
 		
@@ -224,12 +189,6 @@ public class KwsCodeManageController {
 	public String update(@ModelAttribute("searchVO") KwsCodeManageVO searchVO,
 			ModelMap model, HttpServletRequest request)
 			throws Exception{
-		// 로그인체크
-    	if(!kwsLoginManageService.isLogin(request)) {
-    	       model.addAttribute("msg", egovMessageSource.getMessage("Com.text.login.fail"));
-    	       model.addAttribute("searchVO", new KwsCodeManageVO());
-    	      return "/admin/login/loginForm";
-    	}
     	
     	HttpSession session = request.getSession();
     	
@@ -258,12 +217,6 @@ public class KwsCodeManageController {
 	public String delete(@ModelAttribute("searchVO") KwsCodeManageVO searchVO,
 			ModelMap model, HttpServletRequest request)
 			throws Exception{
-		// 로그인체크
-    	if(!kwsLoginManageService.isLogin(request)) {
-    	       model.addAttribute("msg", egovMessageSource.getMessage("Com.text.login.fail"));
-    	       model.addAttribute("searchVO", new KwsCodeManageVO());
-    	      return "/admin/login/loginForm";
-    	}
     	
     	String msg = kwsCodeManageService.deleteCode(searchVO);
     	
@@ -285,13 +238,6 @@ public class KwsCodeManageController {
 			ModelMap model, HttpServletRequest request)
 			throws Exception {
 		
-		// 로그인체크
-    	if(!kwsLoginManageService.isLogin(request)) {
-    	       model.addAttribute("msg", egovMessageSource.getMessage("Com.text.login.fail"));
-    	       model.addAttribute("searchVO", new KwsCodeManageVO());
-    	      return "/admin/login/loginForm";
-    	}
-    	
     	String codeId = request.getParameter("codeId");
     	
     	String overlapStr = "";

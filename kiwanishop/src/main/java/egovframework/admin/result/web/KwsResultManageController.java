@@ -83,13 +83,6 @@ public class KwsResultManageController {
 			ModelMap model, HttpServletRequest request)
 			throws Exception {
 		
-			// 로그인체크
-	    	if(!kwsLoginManageService.isLogin(request)) {
-	    	       model.addAttribute("msg", egovMessageSource.getMessage("Com.text.login.fail"));
-	    	       model.addAttribute("searchVO", new KwsResultManageVO());
-	    	      return "/admin/login/loginForm";
-	    	}
-	    	
 	    	searchVO.setPageUnit(propertyService.getInt("pageUnit"));
 	    	searchVO.setPageSize(propertyService.getInt("pageSize"));
 	    	
@@ -132,13 +125,6 @@ public class KwsResultManageController {
 			ModelMap model, HttpServletRequest request)
 			throws Exception {
 		
-		// 로그인체크
-    	if(!kwsLoginManageService.isLogin(request)) {
-    	       model.addAttribute("msg", egovMessageSource.getMessage("Com.text.login.fail"));
-    	       model.addAttribute("searchVO", new KwsResultManageVO());
-    	      return "/admin/login/loginForm";
-    	}
-    	
     	List<KwsResultManageVO> list = kwsResultManageService.resultDetailView(searchVO);
     	
     	model.addAttribute("resultDetailList", list);
@@ -158,13 +144,6 @@ public class KwsResultManageController {
 			ModelMap model, HttpServletRequest request)
 			throws Exception {
 		
-		// 로그인체크
-    	if(!kwsLoginManageService.isLogin(request)) {
-    	       model.addAttribute("msg", egovMessageSource.getMessage("Com.text.login.fail"));
-    	       model.addAttribute("searchVO", new KwsResultManageVO());
-    	      return "/admin/login/loginForm";
-    	}
-    	
     	KwsCodeManageVO codeVO = new KwsCodeManageVO();
     	codeVO.setCodeId("resultYear");
     	model.addAttribute("yearCodeList", kwsCodeManageService.codeList(codeVO));
@@ -186,13 +165,6 @@ public class KwsResultManageController {
 			ModelMap model, HttpServletRequest request)
 			throws Exception {
 		
-		// 로그인체크
-    	if(!kwsLoginManageService.isLogin(request)) {
-    	       model.addAttribute("msg", egovMessageSource.getMessage("Com.text.login.fail"));
-    	       model.addAttribute("searchVO", new KwsResultManageVO());
-    	      return "/admin/login/loginForm";
-    	}
-
 		final Map<String, MultipartFile> files = multiRequest.getFileMap();
 
 	    if (!files.isEmpty()) {
@@ -242,12 +214,6 @@ public class KwsResultManageController {
 	public String delete(@ModelAttribute("searchVO") KwsResultManageVO searchVO,
 			ModelMap model, HttpServletRequest request)
 			throws Exception{
-		// 로그인체크
-    	if(!kwsLoginManageService.isLogin(request)) {
-    	       model.addAttribute("msg", egovMessageSource.getMessage("Com.text.login.fail"));
-    	       model.addAttribute("searchVO", new KwsResultManageVO());
-    	      return "/admin/login/loginForm";
-    	}
     	
     	String msg = kwsResultManageService.resultDelete(searchVO);
     	
@@ -269,13 +235,6 @@ public class KwsResultManageController {
 			ModelMap model, HttpServletRequest request)
 			throws Exception{
 		
-		// 로그인체크
-    	if(!kwsLoginManageService.isLogin(request)) {
-    	       model.addAttribute("msg", egovMessageSource.getMessage("Com.text.login.fail"));
-    	       model.addAttribute("searchVO", new KwsResultManageVO());
-    	      return "/admin/login/loginForm";
-    	}
-    	
     	if(!Util.isNull(searchVO.getMsg()).equals("")){
 	    	model.addAttribute("msg", new String(searchVO.getMsg().getBytes("8859_1"), "UTF-8"));
     	}
@@ -295,13 +254,6 @@ public class KwsResultManageController {
 			ModelMap model, HttpServletRequest request)
 			throws Exception{
 		
-		// 로그인체크
-    	if(!kwsLoginManageService.isLogin(request)) {
-    	       model.addAttribute("msg", egovMessageSource.getMessage("Com.text.login.fail"));
-    	       model.addAttribute("searchVO", new KwsResultManageVO());
-    	      return "/admin/login/loginForm";
-    	}
-    	
     	String selectDate = Util.isNull(searchVO.getSelectDate());
     	    
     	List<EgovMap> firstList = new ArrayList<EgovMap>();

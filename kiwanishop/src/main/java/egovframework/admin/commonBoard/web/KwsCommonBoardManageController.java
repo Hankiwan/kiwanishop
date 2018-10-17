@@ -84,13 +84,6 @@ public class KwsCommonBoardManageController {
 			ModelMap model, HttpServletRequest request)
 			throws Exception {
 		
-			// 로그인체크
-	    	if(!kwsLoginManageService.isLogin(request)) {
-	    	       model.addAttribute("msg", egovMessageSource.getMessage("Com.text.login.fail"));
-	    	       model.addAttribute("searchVO", new KwsBoardManageVO());
-	    	      return "/admin/login/loginForm";
-	    	}
-	    	
 	    	searchVO.setPageUnit(propertyService.getInt("pageUnit"));
 	    	searchVO.setPageSize(propertyService.getInt("pageSize"));
 	    	
@@ -136,13 +129,6 @@ public class KwsCommonBoardManageController {
 			ModelMap model, HttpServletRequest request)
 			throws Exception {
 		
-		// 로그인체크
-    	if(!kwsLoginManageService.isLogin(request)) {
-    	       model.addAttribute("msg", egovMessageSource.getMessage("Com.text.login.fail"));
-    	       model.addAttribute("searchVO", new KwsBoardManageVO());
-    	      return "/admin/login/loginForm";
-    	}
-    	
     	EgovMap view = kwsCommonBoardManageService.selectCommonBoardManageView(searchVO);
     	model.addAttribute("boardManageView", view);
     	
@@ -162,13 +148,6 @@ public class KwsCommonBoardManageController {
 			ModelMap model, HttpServletRequest request)
 			throws Exception {
 		
-		// 로그인체크
-    	if(!kwsLoginManageService.isLogin(request)) {
-    	       model.addAttribute("msg", egovMessageSource.getMessage("Com.text.login.fail"));
-    	       model.addAttribute("searchVO", new KwsBoardManageVO());
-    	      return "/admin/login/loginForm";
-    	}
-    	
     	searchVO.setMasterSn(searchMasterSn); 
     	
     	EgovMap selectMasterBoardManageView = kwsCommonBoardManageService.selectMasterBoardManageView(searchVO);
@@ -190,13 +169,6 @@ public class KwsCommonBoardManageController {
 			ModelMap model, HttpServletRequest request)
 			throws Exception {
 		
-		// 로그인체크
-    	if(!kwsLoginManageService.isLogin(request)) {
-    	       model.addAttribute("msg", egovMessageSource.getMessage("Com.text.login.fail"));
-    	       model.addAttribute("searchVO", new KwsBoardManageVO());
-    	      return "/admin/login/loginForm";
-    	}
-    	
     	HttpSession session = request.getSession();
     	
     	String userId = (String)session.getAttribute("sAdminId");	//아이디
@@ -258,13 +230,6 @@ public class KwsCommonBoardManageController {
 			ModelMap model, HttpServletRequest request)
 			throws Exception {
 		
-		// 로그인체크
-    	if(!kwsLoginManageService.isLogin(request)) {
-    	       model.addAttribute("msg", egovMessageSource.getMessage("Com.text.login.fail"));
-    	       model.addAttribute("searchVO", new KwsBoardManageVO());
-    	      return "/admin/login/loginForm";
-    	}
-    	
     	EgovMap view = kwsCommonBoardManageService.selectCommonBoardManageView(searchVO);
     	model.addAttribute("commonBoardManageView", view);
 		
@@ -282,12 +247,6 @@ public class KwsCommonBoardManageController {
 	public String update(@ModelAttribute("searchVO") KwsCommonBoardManageVO searchVO,
 			ModelMap model, HttpServletRequest request)
 			throws Exception{
-		// 로그인체크
-    	if(!kwsLoginManageService.isLogin(request)) {
-    	       model.addAttribute("msg", egovMessageSource.getMessage("Com.text.login.fail"));
-    	       model.addAttribute("searchVO", new KwsBoardManageVO());
-    	      return "/admin/login/loginForm";
-    	}
     	
     	HttpSession session = request.getSession();
     	
@@ -316,12 +275,6 @@ public class KwsCommonBoardManageController {
 	public String delete(@ModelAttribute("searchVO") KwsCommonBoardManageVO searchVO,
 			ModelMap model, HttpServletRequest request)
 			throws Exception{
-		// 로그인체크
-    	if(!kwsLoginManageService.isLogin(request)) {
-    	       model.addAttribute("msg", egovMessageSource.getMessage("Com.text.login.fail"));
-    	       model.addAttribute("searchVO", new KwsBoardManageVO());
-    	      return "/admin/login/loginForm";
-    	}
     	
     	String msg = kwsCommonBoardManageService.deleteCommonBoardManage(searchVO);
     	

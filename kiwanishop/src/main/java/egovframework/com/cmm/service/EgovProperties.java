@@ -40,7 +40,7 @@ public class EgovProperties{
 	//프로퍼티 파일의 물리적 위치
     public static final String GLOBALS_PROPERTIES_FILE
 
-    	= "D:\\kiwanishop\\egovframework\\workspace\\kiwanishop\\src\\main\\resources\\egovframework\\egovProps\\globals.properties";
+    	= "C:\\Users\\hkwjjan\\git\\kiwanishop\\kiwanishop\\src\\main\\resources\\egovframework\\egovProps\\globals.properties";
 //	 	= "/app/portal/webapp/WEB-INF/classes/egovframework/egovProps/globals.properties";
 
 	/**

@@ -1,4 +1,4 @@
-package kiwani.kiwanishop;
+package egovframework.kiwanishop;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

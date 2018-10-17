@@ -7,7 +7,7 @@
 
 	<aop:config>
 		<aop:pointcut id="serviceMethod"
-			expression="execution(* egovframework.rte.sample..impl.*Impl.*(..))" />
+			expression="execution(* *..impl.*Impl.*(..))" />
 
 		<aop:aspect ref="exceptionTransfer">
 			<aop:after-throwing throwing="exception"
@@ -63,5 +63,8 @@
 		class="egovframework.rte.cmmn.EgovSampleExcepHndlr" />
 	<bean id="otherHandler"
 		class="egovframework.rte.cmmn.EgovSampleOthersExcepHndlr" />	
-	
+		
+	<aop:aspectj-autoproxy/>
+    <bean id="LoginAspect" class="egovframework.com.cmm.web.LoginAspect" />
+
 </beans>
