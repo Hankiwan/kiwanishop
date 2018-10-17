@@ -40,7 +40,7 @@ import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
 @Controller
 public class KwsBoardManageController {
-	
+	 
 	/** KwsBoardManageService */
     @Resource(name = "kwsBoardManageService")
     private KwsBoardManageService kwsBoardManageService;
