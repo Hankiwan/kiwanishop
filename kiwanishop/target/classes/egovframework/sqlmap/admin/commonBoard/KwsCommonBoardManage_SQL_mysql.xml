@@ -79,9 +79,23 @@
 				DELETE_YN, 
 				BOARD_NO
 			FROM BOARD
-			WHERE MASTER_SN = #masterSn#
+			WHERE 1 = 1
+	]]>
+		<isNotEmpty prepend="AND" property="masterSn">
+			<![CDATA[ MASTER_SN = #masterSn# ]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="searchValue">
+			<isEqual property="searchType" compareValue="title">
+				<![CDATA[ TITLE LIKE CONCAT('%', #searchValue#, '%') ]]>
+			</isEqual>
+			<isEqual property="searchType" compareValue="boardCn">
+				<![CDATA[ BOARD_CN LIKE CONCAT('%', #searchValue#, '%') ]]>
+			</isEqual>
+		</isNotEmpty>
+	<![CDATA[
 			ORDER BY FRST_REGIST_DT DESC
-		]]>
+			LIMIT #firstIndex#, #recordCountPerPage#
+	]]>	
 	</select>
 	
 	<select id="commonBoardManageDAO.selectCommonBoardManageCnt" parameterClass="kwsCommonBoardManageVO" resultClass="java.lang.Integer">
@@ -89,8 +103,19 @@
 			SELECT
 				COUNT(BOARD_SN)
 			FROM BOARD
-			WHERE MASTER_SN = #masterSn#
+			WHERE 1 = 1
 		]]>
+		<isNotEmpty prepend="AND" property="masterSn">
+			<![CDATA[ MASTER_SN = #masterSn# ]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="searchValue">
+			<isEqual property="searchType" compareValue="title">
+				<![CDATA[ TITLE LIKE CONCAT('%', #searchValue#, '%') ]]>
+			</isEqual>
+			<isEqual property="searchType" compareValue="boardCn">
+				<![CDATA[ BOARD_CN LIKE CONCAT('%', #searchValue#, '%') ]]>
+			</isEqual>
+		</isNotEmpty>
 	</select>
 	
 	<select id="commonBoardManageDAO.selectCommonBoardManageView" parameterClass="kwsCommonBoardManageVO" resultClass="egovMap">
