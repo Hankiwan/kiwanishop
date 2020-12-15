@@ -63,7 +63,7 @@ public class KwsCommonBoardManageDAO extends EgovAbstractDAO {
 	@SuppressWarnings("unchecked")
 	public List<EgovMap> selectCommonBoardManageList(KwsCommonBoardManageVO boardVO) throws Exception{
 		return list("commonBoardManageDAO.selectCommonBoardManageList", boardVO);
-	}
+	} 
 	
 	/**
      * 공통 게시판 총갯수 조회 한다.
