@@ -116,7 +116,7 @@ public class EgovFileMngUtil {
 	    int index = orginFileName.lastIndexOf(".");
 	    //String fileName = orginFileName.substring(0, index);
 	    String fileExt = orginFileName.substring(index + 1);
-	    String newName = KeyStr + EgovStringUtil.getTimeStamp() + fileKey;
+	    String newName = KeyStr + EgovStringUtil.getTimeStamp() + fileKey + "." + fileExt;
 	    long _size = file.getSize();
 
 	    if (!"".equals(orginFileName)) {
@@ -204,7 +204,7 @@ public class EgovFileMngUtil {
 	    int index = orginFileName.lastIndexOf(".");
 	    //String fileName = orginFileName.substring(0, index);
 	    String fileExt = orginFileName.substring(index + 1);
-	    String newName = KeyStr + EgovStringUtil.getTimeStamp() + fileKey;
+	    String newName = KeyStr + EgovStringUtil.getTimeStamp() + fileKey + "." + fileExt;
 	    long _size = file.getSize();
 
 	    if (!"".equals(orginFileName)) {

@@ -12,8 +12,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -168,7 +166,6 @@ public class KwsCommonBoardManageController {
 	public String regist(@ModelAttribute("searchVO") KwsCommonBoardManageVO searchVO,
 			ModelMap model, HttpServletRequest request)
 			throws Exception {
-		
     	HttpSession session = request.getSession();
     	
     	String userId = (String)session.getAttribute("sAdminId");	//아이디
@@ -192,7 +189,6 @@ public class KwsCommonBoardManageController {
 
     	//파일 첨부
     	if(!"".equals(atchFileId)) {
-
 			FileVO inputFileVO = new FileVO();
     		inputFileVO.setAtchFileId(atchFileId);
     		inputFileVO.setFileSn("0");
@@ -208,6 +204,7 @@ public class KwsCommonBoardManageController {
     		inputFileVO.setLastUpdtIp(codeIp);
 
     		searchVO.setFile(inputFileVO);
+    		searchVO.setFileId(atchFileId);
     	}
 		
 		String msg = kwsCommonBoardManageService.insertCommonBoardManage(searchVO);
