@@ -11,21 +11,21 @@
 <script type="text/javascript" src="/static/admin/js/jquery.js"></script>
 <script type="text/javascript">
 	function fncList(){
-		jQuery("#boardForm").attr("action", "/admin/board/boardManageList.do");
+		jQuery("#boardForm").attr("action", "/admin/commonBoard/commonBoardManageList.do");
 		jQuery("#boardForm").submit();
 	}
 	
 	function fncDelete(masterSn){
 		if(confirm("삭제하시겠습니까?")){
 			jQuery("#masterSn").val(masterSn);
-			jQuery("#boardForm").attr("action", "/admin/board/boardManageDelete.do");
+			jQuery("#boardForm").attr("action", "/admin/commonBoard/commonBoardManageDelete.do");
 			jQuery("#boardForm").submit();			
 		}
 	}
 	
 	function fncUpdateForm(masterSn){
 		jQuery("#masterSn").val(masterSn);
-		jQuery("#boardForm").attr("action", "/admin/board/boardManageUpdateForm.do");
+		jQuery("#boardForm").attr("action", "/admin/commonBoard/commonBoardManageUpdateForm.do");
 		jQuery("#boardForm").submit();
 	}
 </script>

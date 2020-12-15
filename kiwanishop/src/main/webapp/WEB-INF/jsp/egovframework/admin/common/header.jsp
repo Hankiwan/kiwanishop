@@ -12,11 +12,11 @@
 <title>기와니샵 메인</title>    
 <link rel="stylesheet" type="text/css" href="/static/admin/css/unification.css" />
 <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css" />
-<link rel="stylesheet" type="text/css" href="/static/admin/css/jquery-ui.css" />
-<script src="/static/admin/js/jquery-1.8.2.js" type="text/javascript"></script>
-<script src="/static/admin/jQueryPlugIn/js/jquery-ui-1.8.5.custom.min.js" type="text/javascript"></script>
+<!-- <link rel="stylesheet" type="text/css" href="/static/admin/css/jquery-ui.css" /> -->
+<!-- <script src="/static/admin/jQueryPlugIn/js/jquery-ui-1.8.5.custom.min.js" type="text/javascript"></script> -->
 <script src="/static/admin/js/globalURL.js" type="text/javascript"></script>
-<script src="/static/admin/js/common.js" type="text/javascript"></script>
+<!-- <script src="/static/admin/js/common.js" type="text/javascript"></script> -->
+<script src="/static/admin/js/jquery-1.8.2.js" type="text/javascript"></script>
 <script type="text/javascript">
 	jQuery(document).ready(function(){
 		if("${msg}" != "" && "${msg}" != "mainChk"){

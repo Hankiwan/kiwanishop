@@ -107,8 +107,14 @@
 								<tr>
 									<td><c:out value="${no}"/></td>
 									<td><a href="javascript:fncView('<c:out value="${bList.boardSn}" />');"><c:out value="${bList.title}" escapeXml="false" /></a></td>
-									<td><c:out value="${bList.fileId}" /></td>
-									<td><c:out value="${bList.frstRegistDt}" /></td>
+									<td>
+										<c:if test="${fn:length(bList.setFiles) != 0}">
+											<c:forEach var="fList" items="${bList.setFiles}" varStatus="status">
+												<c:out value="${fList.orignlFileNm}" />
+											</c:forEach>
+										</c:if>
+									</td>
+									<td><c:out value="${fn:substring(bList.frstRegistDt,0,10)}" /></td>
 								</tr>
 								<c:set var="no" value="${no-1}" />
 							</c:forEach>

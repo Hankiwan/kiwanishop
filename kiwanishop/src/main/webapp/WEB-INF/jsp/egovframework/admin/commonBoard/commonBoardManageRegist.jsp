@@ -8,7 +8,7 @@
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 <jsp:include page="/admin/common/header.do" />
 
-<script type="text/javascript" src="/static/admin/js/jquery.js"></script>
+<!-- <script type="text/javascript" src="/static/admin/js/jquery.js"></script> -->
 <script type="text/javascript" src="/static/ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
 	function fnc_regist(val){
@@ -44,8 +44,14 @@
 		}
 		
 		if(confirm("등록하시겠습니까?")){
+			<c:if test="${selectMasterBoardManageView.fileYn eq 'Y'}">
+				$("#bFile").remove();
+				$("#fileImage").remove();
+				jQuery("#boardForm").attr("target", "");
+			</c:if>
+			$("#boardForm").attr("enctype", "");
 			jQuery("#boardForm").attr("action", "/admin/commonBoard/commonBoardManageRegist.do");
-			jQuery("#boardForm").submit();	
+			jQuery("#boardForm").submit();
 		}
 	}
 	

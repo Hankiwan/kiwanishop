@@ -5,4 +5,5 @@
 <sqlMapConfig>
 	<sqlMap resource="egovframework/sqlmap/home/login/KwsLogin_SQL_mysql.xml"/>
 	<sqlMap resource="egovframework/sqlmap/home/include/KwsInclude_SQL_mysql.xml"/>
+	<sqlMap resource="egovframework/sqlmap/home/ksnetPg/KsnetPg_SQL_mysql.xml"/>
 </sqlMapConfig>

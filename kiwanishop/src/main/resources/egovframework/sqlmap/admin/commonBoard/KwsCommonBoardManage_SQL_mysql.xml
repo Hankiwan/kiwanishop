@@ -64,7 +64,7 @@
 				BOARD_CN, 
 				SECRET_USE_YN, 
 				FILE_ID, 
-				DATE_FORMAT(FRST_REGIST_DT, '%Y-%m-%d') FRST_REGIST_DT, 
+				FRST_REGIST_DT, 
 				FRST_REGIST_ID, 
 				FRST_REGIST_IP, 
 				LAST_UPDT_DT, 
@@ -127,7 +127,7 @@
 				BOARD_CN, 
 				SECRET_USE_YN, 
 				FILE_ID, 
-				DATE_FORMAT(FRST_REGIST_DT, '%Y-%m-%d') FRST_REGIST_DT, 
+				FRST_REGIST_DT, 
 				FRST_REGIST_ID, 
 				FRST_REGIST_IP, 
 				LAST_UPDT_DT, 
@@ -295,5 +295,17 @@
 		WHERE
 		FILE_ID = #atchFileId# AND FILE_NO = #fileSn#
 	</delete>
+	
+	<select id="commonBoardManageDAO.selectFileList" parameterClass="java.lang.String" resultClass="egovMap">
+		<![CDATA[
+			SELECT
+				FILE_ID,
+				FILE_NO,
+				FILE_NM, 
+				ORIGNL_FILE_NM				
+			FROM COM_FILEDETAIL
+			WHERE FILE_ID = #fileId#
+		]]>
+	</select>
 	
 </sqlMap>

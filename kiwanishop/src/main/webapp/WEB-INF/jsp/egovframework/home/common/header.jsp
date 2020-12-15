@@ -12,16 +12,16 @@
 <title>기와니샵 메인</title>    
 <link rel="stylesheet" type="text/css" href="/static/home/css/unification.css" />
 <link rel="stylesheet" type="text/css" href="/static/home/css/admin.css" />
-<link rel="stylesheet" type="text/css" href="/static/home/css/jquery-ui.css" />
-<script src="/static/home/js/jquery-1.4.2.min.js" type="text/javascript"></script>
-<script src="/static/home/jQueryPlugIn/js/jquery-ui-1.8.5.custom.min.js" type="text/javascript"></script>
+<!-- <link rel="stylesheet" type="text/css" href="/static/home/css/jquery-ui.css" /> -->
+<script src="/static/home/js/jquery-1.8.2.js" type="text/javascript"></script>
+<!-- <script src="/static/home/jQueryPlugIn/js/jquery-ui-1.8.5.custom.min.js" type="text/javascript"></script> -->
 <script src="/static/home/js/globalURL.js" type="text/javascript"></script>
-<script src="/static/home/js/common.js" type="text/javascript"></script>
+<!-- <script src="/static/home/js/common.js" type="text/javascript"></script> -->
 <script type="text/javascript">
 	jQuery(document).ready(function(){
-			<c:if test="${param.msg == '99'}" >
-				alert("아이디 및 비밀번호가 올바르지 않습니다. \n 다시 로그인해주세요.");
-			</c:if>
+		if("${msg}" != ""){
+			alert("${msg}");
+		}
 	});
 	
 	//로그인, 로그아웃
