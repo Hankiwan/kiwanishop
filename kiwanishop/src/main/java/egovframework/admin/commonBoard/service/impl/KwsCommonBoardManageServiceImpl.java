@@ -12,6 +12,7 @@ import egovframework.admin.board.service.KwsBoardManageVO;
 import egovframework.admin.commonBoard.service.KwsCommonBoardManageService;
 import egovframework.admin.commonBoard.service.KwsCommonBoardManageVO;
 import egovframework.com.cmm.EgovMessageSource;
+import egovframework.com.cmm.service.FileVO;
 import egovframework.rte.fdl.cmmn.AbstractServiceImpl;
 import egovframework.rte.psl.dataaccess.util.EgovMap;
 
@@ -68,7 +69,15 @@ public class KwsCommonBoardManageServiceImpl extends AbstractServiceImpl impleme
 	public Map<String, Object> selectCommonBoardManageList(KwsCommonBoardManageVO boardVO) throws Exception{
 		Map<String, Object> boardMap = new HashMap<String, Object>();
 	
-		List<KwsCommonBoardManageVO> selectCommonBoardManageList = kwsCommonBoardManageDAO.selectCommonBoardManageList(boardVO);
+		List<EgovMap> selectCommonBoardManageList = kwsCommonBoardManageDAO.selectCommonBoardManageList(boardVO);
+		
+		for(int i = 0; i < selectCommonBoardManageList.size(); i++){
+			EgovMap commonBoardMap = selectCommonBoardManageList.get(i);
+			if(commonBoardMap.get("fileId") != null){
+				List<EgovMap> fileMap = kwsCommonBoardManageDAO.selectFileList((String)commonBoardMap.get("fileId"));
+				selectCommonBoardManageList.get(i).put("setFiles", fileMap);	
+			}
+		}
 		
 		int totalCnt = kwsCommonBoardManageDAO.selectCommonBoardManageCnt(boardVO);
 		
@@ -96,7 +105,7 @@ public class KwsCommonBoardManageServiceImpl extends AbstractServiceImpl impleme
     	
     	String msg = "";
     	
-    	if(boardVO.getFiles() != null){
+    	if(boardVO.getFile() != null){
     		kwsCommonBoardManageDAO.insertFile(boardVO.getFile());
     		kwsCommonBoardManageDAO.insertFileDetail(boardVO.getFile());
     	}

@@ -61,7 +61,7 @@ public class KwsCommonBoardManageDAO extends EgovAbstractDAO {
      * @throws Exception
      */
 	@SuppressWarnings("unchecked")
-	public List<KwsCommonBoardManageVO> selectCommonBoardManageList(KwsCommonBoardManageVO boardVO) throws Exception{
+	public List<EgovMap> selectCommonBoardManageList(KwsCommonBoardManageVO boardVO) throws Exception{
 		return list("commonBoardManageDAO.selectCommonBoardManageList", boardVO);
 	}
 	
@@ -156,5 +156,17 @@ public class KwsCommonBoardManageDAO extends EgovAbstractDAO {
     public void deleteFileDetail(FileVO fileVO) throws Exception {
     	delete("commonBoardManageDAO.deleteFileDetail", fileVO);
     }
+    
+    /**
+     * 상세파일 정보를 조회 한다.
+     *
+     * @param KwsCommonBoardManageVO
+     * @return
+     * @throws Exception
+     */
+	@SuppressWarnings("unchecked")
+	public List<EgovMap> selectFileList(String fileId) throws Exception{
+		return list("commonBoardManageDAO.selectFileList", fileId);
+	}
 	
 }
